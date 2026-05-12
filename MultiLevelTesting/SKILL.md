@@ -152,3 +152,10 @@ you write them throughout development, not in a batch at the end.
 
 A test suite isn't there to prove the code works today. It's
 there so the code can change tomorrow.
+
+## Sources
+
+The pyramid + the "tests as spec / examples / regression guard /
+refactor net" framing comes from the 67 Bricks engineering blog
+(67bricks.com). This SKILL.md is a restatement in our own voice;
+the substance and the headline benefits are theirs.

@@ -148,3 +148,11 @@ small PRs.
 The PR isn't the unit of work. The merged change is the unit
 of work. PRs only matter inasmuch as they make those merged
 changes good.
+
+## Sources
+
+The "small short-lived branches, branch-from-main, stacked PRs
+when dependent, keep larger branches rebased" framing comes from
+the 67 Bricks engineering blog (67bricks.com). This SKILL.md is
+a restatement in our own voice; the principle and the practical
+advice are theirs.
