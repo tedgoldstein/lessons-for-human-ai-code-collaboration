@@ -15,6 +15,7 @@ example that taught it.
 | Skill | One-liner |
 |---|---|
 | [DontReinventTheWheel](DontReinventTheWheel/SKILL.md) | Recognize when a custom thing you're building is isomorphic to a mature platform — and map onto the platform instead of rebuilding it. |
+| [MultiLevelTesting](MultiLevelTesting/SKILL.md) | Combine many unit tests, fewer integration tests, fewer E2E, and a small set of smoke tests. Each level brings different benefits; together they make a codebase changeable. |
 
 ## Format
 
