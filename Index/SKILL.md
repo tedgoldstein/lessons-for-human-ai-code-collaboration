@@ -138,6 +138,253 @@ two structurally-identical config profiles (local vs. prod
 differing only in the `endpoint` field), and a client builder
 with one `if` that branches on endpoint-present-or-absent.
 
+### → Load `OneChangeAtATime`
+
+When the work involves **debugging a regression**, **shipping a
+fix**, or **bundling unrelated changes**.
+
+Triggers:
+
+- A regression appeared mid-week and you can't tell which of
+  several recent changes caused it.
+- You're about to commit a bug fix and notice you also did "a
+  small cleanup along the way."
+- A dep bump and a refactor and a feature in the same PR.
+- "It works on my machine" + many simultaneous environment
+  differences.
+- A failing test starts passing after a multi-change diff and
+  you don't isolate which part fixed it.
+
+**The skill teaches:** the unit of change should be the unit of
+investigation — bisect, revert, and review only work cleanly when
+each commit / PR / deploy is a single intent.
+
+### → Load `MakeTheWrongThingHard`
+
+When the work involves **designing an API, module, or call site**
+that other code (or future-you) will use.
+
+Triggers:
+
+- A reviewer is writing comments like "remember to call
+  `close()`" or "don't forget to initialise before use."
+- A bug came from passing a string where a different kind of
+  string was meant ("wrong ID type").
+- README has "you must call X before Y" warnings.
+- A function takes `(bool, bool, bool, bool)` and people swap
+  them.
+- `null` snuck somewhere and the test suite didn't catch it.
+
+**The skill teaches:** shift the cost of correctness to compile
+time — newtypes, sum types, RAII / scope guards, typestates,
+builders, lints. The user shouldn't have to *remember* anything.
+
+### → Load `NamingIsAPI`
+
+When the work involves **naming functions, types, modules, or
+variables** — or fixing a confusing existing name.
+
+Triggers:
+
+- You're committing code with a function named `process`,
+  `handle`, `data`, `result`, `helper`, or `tmp`.
+- A comment is explaining what a variable is — the name should
+  have done that.
+- A reviewer asks "what does this return?" when the name should
+  have answered.
+- Two functions named `getUser` and `fetchUser` — you have to
+  read the bodies to learn the difference.
+
+**The skill teaches:** names are the most-used surface of code —
+specific over generic, intention over implementation, full
+words over abbreviations, long descriptive over short clever.
+Rename freely; modern IDEs make it cheap.
+
+### → Load `LogsAreAFeature`
+
+When the work involves **production logging** — either designing
+it for a new service or diagnosing why an incident gave no
+signal.
+
+Triggers:
+
+- A production incident just happened and the only signal is
+  `error` with no context.
+- You can't tell *which user* or *which request* a log line
+  belongs to.
+- Logs are full of `console.log("here")` from someone's
+  debugging session.
+- Sensitive data is being logged.
+- "We'll add logging later."
+
+**The skill teaches:** logs are the production debugger. Design
+them deliberately — structured (JSON / key-value), correlation
+IDs threaded, levels used consistently, module-boundary
+placement, redaction at the source.
+
+### → Load `BoringTechWherePossible`
+
+When the work involves **choosing a foundational tool** — a
+database, a queue, a language, a framework, an OS.
+
+Triggers:
+
+- About to adopt a 2-month-old framework as the foundation of a
+  new service.
+- The plan calls for a new datastore where Postgres / SQLite
+  would do.
+- A teammate says "let's rewrite in $LANGUAGE_OF_THE_MONTH."
+- Onboarding requires learning three custom tools.
+- A production incident traces to an obscure dep with no Stack
+  Overflow hits.
+- Hiring is hard because nobody on the market has used your
+  stack.
+
+**The skill teaches:** at the bottom of the stack, mature beats
+new. Reserve novelty for the *product* layer. Boring tech has
+manuals, hires, war stories, and bounded surprise.
+
+### → Load `IdempotentByDefault`
+
+When the work involves **any mutating operation** in a network /
+queue / job context — or diagnosing a duplicate-side-effect bug.
+
+Triggers:
+
+- The word "retry" appears anywhere in the design.
+- A POST creates a duplicate row when the client retries after
+  timeout.
+- A queue consumer is double-processing.
+- A scheduled job catches up after an outage and re-runs items.
+- A user double-clicks "Pay" and gets two charges.
+- A migration script can't be re-run safely.
+
+**The skill teaches:** retry isn't optional in distributed
+systems. Make operations naturally idempotent (PUT-style) or
+carry an idempotency key the receiver dedupes against. Three
+flavors: natural, key-based, compensable.
+
+### → Load `SingleSourceOfTruth`
+
+When the work involves **state that lives in multiple places** —
+or diagnosing drift.
+
+Triggers:
+
+- The same constant defined in two files.
+- A user / customer / product record in three datastores.
+- A config value set in `.env`, Terraform, CI secrets, AND a
+  ConfigMap.
+- A bug appears as "data is wrong in the UI" but right in the API.
+- A "sync script" exists to keep two systems in agreement.
+- A duplicate has drifted and you can't tell which copy is right.
+
+**The skill teaches:** name exactly one authoritative owner for
+each piece of state. Derive everything else. Caches are
+explicit copies with named refresh; replication needs a
+conflict policy.
+
+### → Load `TimeBoxedExperiments`
+
+When the work involves **technical uncertainty** that doesn't
+have a natural endpoint.
+
+Triggers:
+
+- "Let me just try X and see if it works."
+- A spike has been going for weeks with no decision.
+- A PR titled "WIP: figuring out the right approach."
+- Estimating something you don't yet understand.
+- A proof-of-concept dragging into a half-finished production
+  system.
+- You've been deep in a problem for hours and can't tell if
+  you're close.
+
+**The skill teaches:** declare a budget before exploring (a
+specific question, a fixed time, success criteria, pivot
+options). When the budget elapses, decide — extend, pivot, or
+done. The budget itself is the tool.
+
+### → Load `ReadTheSourceFirst`
+
+When the work involves **a dependency behaving unexpectedly** —
+before reaching for Stack Overflow / docs / maintainers.
+
+Triggers:
+
+- A library does something the docs don't explain.
+- A flag's documented behavior doesn't match what you observe.
+- An error message comes from inside a dependency.
+- A method "sometimes returns null" with no documented reason.
+- Top Stack Overflow answer is from 2017; library is on v3.
+- A GitHub issue is unresolved for years.
+
+**The skill teaches:** the source is the only source of truth
+guaranteed to be current. A focused 30-minute read often beats
+hours of searching. Use IDE "Go to Definition," locate the
+entry point, follow only the path that matters, capture the
+finding.
+
+### → Load `TheBisectMindset`
+
+When the work involves **finding the introducing commit of a
+regression** — or maintaining a repo so bisect works.
+
+Triggers:
+
+- A regression appeared between a known-good version (last
+  release, last week) and now.
+- A test that was green is suddenly red.
+- "I think it broke somewhere this sprint…"
+- A performance regression appeared without anyone noticing.
+- You're tempted to read 50 commits manually.
+
+**The skill teaches:** `git bisect` finds the introducing
+commit in log₂(N) steps. Use `git bisect run` with an
+automated check-script. The second half: keep the repo
+bisectable — every commit compiles, tests run, commits are
+single-intent.
+
+### → Load `PostmortemsWithoutBlame`
+
+When the work involves **the response to an incident** — either
+running a postmortem or sitting in one.
+
+Triggers:
+
+- A production incident just happened.
+- Someone wants to "find out who did this."
+- A previous incident has recurred — the prior postmortem
+  didn't produce systemic fixes.
+- A near-miss happened.
+- The room's energy is *who* rather than *what.*
+
+**The skill teaches:** target the system, not the person. The
+person was the trigger; the system loaded the gun. Action
+items go to teams, are dated, and change the system. Use the
+word "system" relentlessly; document broadly; follow up on
+actions.
+
+### → Load `FeatureFlagsAreInfrastructure`
+
+When the work involves **decoupling deploy from launch**,
+gradual rollouts, A/B tests, or rapid rollback.
+
+Triggers:
+
+- A feature would otherwise live in a long-running branch.
+- A risky change needs to ship to 1% → 10% → 100%.
+- A multi-step rollout requires coordinated DB + code + cleanup.
+- A change might need fast rollback without a redeploy.
+- A team is debating "should we deploy this Friday?"
+- A change has cross-team coordination (frontend ships first,
+  backend later).
+
+**The skill teaches:** deployed ≠ enabled. Centralise a flag
+system; name flags by what they gate; default off; rolled out
+by percentage / cohort. Track lifecycle (birth → internal →
+gradual → full → death). Aggressive cleanup of dead flags.
+
 ## How to use this index
 
 1. Read the trigger phrases for each entry; they cover most of
