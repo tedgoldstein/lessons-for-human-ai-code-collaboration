@@ -508,6 +508,200 @@ work, inline LOCAL MEMORY rules in cloud prompts, expect
 predictable collisions when sessions independently reach
 for the same concept, document collisions when they happen.
 
+### → Load `ReplaceDontRefactor`
+
+When the work involves **an existing approach that's
+structurally wrong** — not just buggy, but built on the wrong
+substrate — and refactoring incrementally toward the right
+shape is stalling.
+
+Triggers:
+
+- The refactor keeps stalling because each step requires
+  re-cutting the design.
+- "We could refactor X into Y, but we'd have to first refactor
+  Z, A, B..."
+- You've been refactoring the same module for three weeks
+  without converging.
+- The codebase has shapes from two design eras coexisting
+  awkwardly, with bridge code nobody understands.
+- "Should we just start over?" is being asked seriously.
+- The framework / library / pattern you adopted has actively
+  fought you on the last three features.
+
+**The skill teaches:** tag the old as recoverable (a git tag
+with an evocative name), build the new from a clean root,
+co-exist briefly, cut over once on a documented date, delete
+the old. Wave-replacement, not gradual transformation. The
+data (contract) survives; the code that reads it is replaced.
+
+### → Load `BootstrapByHand`
+
+When the work involves **a tool that's supposed to manage
+some artifact, but the tool isn't yet ready to manage
+itself** — a self-referential bootstrap moment.
+
+Triggers:
+
+- The new tool isn't ready, and you need to use the system
+  now.
+- A bug in the tool prevents using the tool on itself.
+- An AI agent or script needs to participate, but the only
+  documented surface is the (incomplete) tool.
+- You're tempted to wait for the tool to be polished before
+  filing the issue that's blocking the polish.
+- A meta-bug needs to be filed about the bug-tracker that
+  files bugs.
+
+**The skill teaches:** fall back to the contract directly.
+Edit the file by hand using whatever cheap substrate
+(markdown, JSON, plain text) the contract uses. The tool
+can land later; the work doesn't wait. Works only if the
+contract is hand-editable — pairs with
+`TheContractIsTheArtifact`.
+
+### → Load `PolishWhenLoadBearing`
+
+When the work involves **deciding whether to bring
+infrastructure up to ship-quality** — CI, signing,
+notarization, monitoring, release scripts — before the
+project has clearly earned the polish.
+
+Triggers:
+
+- About to add CI / signing / monitoring before the thing
+  being shipped has stabilized.
+- A polish task is taking longer than the actual work
+  it's meant to enable.
+- An old infrastructure decision is "wrong" but nothing
+  currently depends on it being right.
+- A new contributor proposes heavyweight process for a
+  pre-product project.
+- You're solo on a project and considering team-grade
+  processes.
+- "Best practices" is being invoked without naming the
+  problem it solves.
+
+**The skill teaches:** polish what's currently load-bearing,
+defer what isn't, document the deferred imperfections,
+notice the trigger when deferred polish becomes load-
+bearing. The timing-counterpart to `FormalVsImprovisational`.
+
+### → Load `CaptureInClustersTriageLater`
+
+When the work involves **rapid idea capture** — meetings,
+design sessions, reading sessions, or a user firing
+"add in: X" multiple times in quick succession.
+
+Triggers:
+
+- A conversation produces a cluster of related ideas.
+- A user (or you) says "add in: X" several times in a row.
+- You catch yourself thinking "I should refine this before
+  filing" — and the result is you don't file at all.
+- The tracker is being treated as a perfect filing cabinet
+  rather than a scratchpad.
+- A meeting produces 20 ideas; the tracker has time for
+  three.
+- About to lose track of an idea while triaging a related
+  one.
+
+**The skill teaches:** separate capture from triage.
+Capture is fast, broad, friction-free; triage is slow,
+narrow, discriminating. Do them at different times. The
+methodology should be cheap enough to use as a scratchpad;
+formal filing happens during triage.
+
+### → Load `PushIsPublication`
+
+When the work involves **deciding when to push commits to
+origin**, especially in AI-augmented workflows where many
+commits may be generated autonomously.
+
+Triggers:
+
+- An AI is generating commits autonomously and you're
+  considering auto-push.
+- You set up — or are tempted to set up — a post-commit
+  push hook.
+- Multiple AI sessions might trigger CI in racing ways.
+- An AI just pushed a change you wanted to review locally
+  first.
+- You're working solo and your push log mirrors your
+  commit log exactly.
+- A force-push is being considered to fix something
+  recently pushed reflexively.
+
+**The skill teaches:** commit reflexively, push
+deliberately. Local commits are cheap and reversible;
+push is publication (triggers CI, deploys, visibility
+to other sessions). Reserve push as a review-then-
+publish checkpoint. Complements (doesn't contradict)
+`SmallBatchCommitsMergedOften` — small batches are about
+PR size; push-deliberately is about individual-session
+publication cadence.
+
+### → Load `GrammarIsAlsoAPI`
+
+When the work involves **designing the syntax of how
+operations are invoked** — verb forms in a CLI or
+methodology, identifier sigils, capitalization of product
+names — beyond just choosing the names themselves.
+
+Triggers:
+
+- Designing a CLI's verb table or a methodology's
+  vocabulary.
+- Choosing whether to prefix identifiers with a sigil
+  (`R12345678` vs `12345678`).
+- Capitalization decisions for product names (`radar.app`
+  vs `Radar.app`).
+- A conversational AI needs to recognize commands embedded
+  in natural-language messages.
+- Identifiers in your system are visually identical to
+  identifiers in adjacent systems.
+- The same operation has different phrasings across docs /
+  UI / CLI / chat.
+
+**The skill teaches:** grammar of invocation (verb forms,
+sigils, casing) is a UX surface. Names say *what*;
+grammar says *how to address it*. Self-identifying
+identifiers (`R<body>` style sigils) survive in prose,
+support precise regex matching, and disambiguate from
+adjacent identifier-spaces. Permissive in input,
+canonical in output.
+
+### → Load `AskExactlyWhenAmbiguous`
+
+When **operating under autonomous scope** ("work largely
+unsupervised," "use your judgment," "you decide") and
+hitting a decision point.
+
+Triggers:
+
+- The user said "work autonomously" or similar.
+- You're tempted to ask permission for a reversible local
+  file edit.
+- You're tempted to silently make a call on something
+  irreversible, externally-visible, or underspecified.
+- An ambiguous instruction has two reasonable
+  interpretations and the wrong one would be hard to
+  undo.
+- About to take a destructive action (delete, force-push,
+  drop database).
+- About to take an action whose side-effects exit the
+  local environment (push, deploy, message, charge).
+- A decision requires information the user has but you
+  don't.
+
+**The skill teaches:** default proceed for reversible local
+decisions; pause for hard-to-reverse, externally-visible,
+or under-specified ones. Structure the pause ("here are
+options A/B/C, I lean A because X, what's your call?")
+rather than open-ended. Over-confirming is friction;
+silent deciding the wrong thing is worse. The skill is
+reading which moment is which.
+
 ## How to use this index
 
 1. Read the trigger phrases for each entry; they cover most of
