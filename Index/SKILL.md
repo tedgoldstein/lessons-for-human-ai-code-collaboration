@@ -385,6 +385,129 @@ system; name flags by what they gate; default off; rolled out
 by percentage / cohort. Track lifecycle (birth → internal →
 gradual → full → death). Aggressive cleanup of dead flags.
 
+### → Load `FormalVsImprovisational`
+
+When the work involves **choosing how much ceremony to apply** —
+deciding whether to design-first or code-first, whether to write
+tests now or later, whether to type things strictly or
+loosely — or diagnosing a mismatch between the style and the
+stakes.
+
+Triggers:
+
+- About to write a week of design docs for what's plausibly a
+  one-day spike.
+- About to ship a customer-facing production service with zero
+  tests because "we'll add them later."
+- An AI agent is generating 200 lines of defensive error
+  handling and docstrings for a 20-line throwaway script.
+- A prototype quietly became production infrastructure and
+  still has no tests / types / rollback path.
+- "Move fast and break things" being invoked in a regulated
+  domain (medical, financial, safety-critical).
+- A code review is rejecting a research spike for not matching
+  production conventions.
+- A research spike has spent three weeks on architecture and
+  zero on the actual question.
+
+**The skill teaches:** match formality to the stakes, not the
+temperament. Formal at high stakes / low reversibility / many
+consumers; improvisational at throwaway / single-consumer /
+cheap-to-redo. In the wide middle, use automated guardrails
+(CI, tests, types, feature flags, idempotency) to buy
+informality at lower risk — the DevOps synthesis.
+
+### → Load `TheContractIsTheArtifact`
+
+When the work involves **designing a system that has both data
+and tooling**, or choosing where the canonical state should
+live, or noticing that a workflow is brittle because it depends
+on a single tool being available.
+
+Triggers:
+
+- Designing a new system that has both persistent state and a
+  UI / app / CLI.
+- You're tempted to put the canonical data inside the app's
+  memory or a private database with the UI as the only access
+  surface.
+- A migration is required because the storage format is locked
+  to one tool.
+- An AI agent or script needs to participate in a workflow,
+  but the only documented surface is a clickable UI.
+- The roadmap depends on one specific app being polished before
+  users can engage with the system.
+- "I want to file a bug, but the bug tracker is broken" —
+  the contract should let you file the bug anyway.
+- You catch yourself writing a custom binary format for
+  something that could be text.
+
+**The skill teaches:** make the file format / schema / data
+shape the durable artifact; tools become renderers and
+mutators of a contract that outlives them. Cheap substrates
+(plain text + git, JSON, markdown) attract participants —
+humans, multiple AIs, scripts, future tools — without
+permission.
+
+### → Load `CommonsWithDivergentClones`
+
+When the work involves **multiple projects that share
+substantial infrastructure** but have separate product
+identities, or choosing between monorepo / library / fork.
+
+Triggers:
+
+- Two or three products about to grow that share auth, UI
+  primitives, data pipelines, a methodology, or a domain
+  model.
+- "Should we monorepo this?"
+- A bug in code-you-share-with-another-team needs fixing in
+  five places.
+- An emerging pattern in product-A that product-B will
+  clearly also need.
+- You're tempted to make existing product code "general" to
+  support a second product and the changes are starting to
+  feel hostile to product-A's reality.
+- A copy-pasted shared module has drifted between products
+  and nobody knows which copy is right.
+
+**The skill teaches:** model the shared kernel as a
+**commons** in its own repo with its own identity. Other
+products are git clones that diverged. Periodic one-way
+merge from commons → descendants; changes never flow back.
+Cheaper than monorepo when the products are genuinely
+separate, more honest than copy-paste, more flexible than
+a published library.
+
+### → Load `MultiAICollaborationViaGit`
+
+When the work involves **two or more AI coding sessions on the
+same repository concurrently**, or one AI session running
+while a human works in parallel.
+
+Triggers:
+
+- About to run a second Claude Code session on a repo while
+  the first is mid-task.
+- Setting up a `/schedule`d cloud routine on the same repo as
+  your laptop session.
+- A `git stash` is tempting in a multi-session repo.
+- You notice uncommitted changes in the working tree you
+  didn't make.
+- Two sessions appear to be designing the same feature with
+  different names.
+- Writing a cloud-routine prompt and realizing the agent
+  can't see your `~/.claude/memory/` rules.
+- A cloud routine just committed something that contradicts
+  a rule the laptop session has internalized.
+
+**The skill teaches:** the git tree is the coordination
+protocol — sessions share files, not state. One branch per
+session, explicit scope rules, never trample uncommitted
+work, inline LOCAL MEMORY rules in cloud prompts, expect
+predictable collisions when sessions independently reach
+for the same concept, document collisions when they happen.
+
 ## How to use this index
 
 1. Read the trigger phrases for each entry; they cover most of

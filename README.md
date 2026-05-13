@@ -53,6 +53,10 @@ the current situation needs.
 | [TheBisectMindset](TheBisectMindset/SKILL.md) | `git bisect` finds the introducing commit of a regression in log₂(N) steps. Reach for it early; keep the repo bisectable. |
 | [PostmortemsWithoutBlame](PostmortemsWithoutBlame/SKILL.md) | After an incident, target the system, not the person. Action items change the system so the same class of failure can't recur. |
 | [FeatureFlagsAreInfrastructure](FeatureFlagsAreInfrastructure/SKILL.md) | Treat feature flags as first-class infrastructure. Decouple deployed-vs-enabled. Centralised flag store, named clearly, owner + expiry per flag. |
+| [FormalVsImprovisational](FormalVsImprovisational/SKILL.md) | Match formality to stakes, not temperament. Formal where stakes are high or reversibility low; improvisational where work is throwaway. In the wide middle, automated guardrails (CI, tests, types, flags, idempotency) buy informality at lower risk — the DevOps synthesis. |
+| [TheContractIsTheArtifact](TheContractIsTheArtifact/SKILL.md) | Make the file format / schema / data shape the durable artifact; tools are renderers. Cheap substrates (plain text + git, JSON, markdown) attract humans, scripts, multiple AIs as participants without permission. Tools die; contracts survive. |
+| [CommonsWithDivergentClones](CommonsWithDivergentClones/SKILL.md) | Multiple products with shared infrastructure → model the shared kernel as a **commons** in its own repo, with descendant projects as git clones that diverge. Periodic one-way merge from commons → descendants; changes never flow back. |
+| [MultiAICollaborationViaGit](MultiAICollaborationViaGit/SKILL.md) | When two or more AI sessions work on the same repo concurrently, git is the coordination protocol. Branch per session, scope rules, never trample uncommitted work, inline LOCAL MEMORY into cloud-agent prompts, expect predictable collisions. |
 
 ## Why human-AI specifically
 
