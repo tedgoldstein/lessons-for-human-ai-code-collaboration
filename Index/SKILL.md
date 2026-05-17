@@ -508,6 +508,48 @@ work, inline LOCAL MEMORY rules in cloud prompts, expect
 predictable collisions when sessions independently reach
 for the same concept, document collisions when they happen.
 
+### → Load `CausalDivergence`
+
+When the work involves **multiple actors operating on shared
+state with possibly different views of it** — most commonly
+AI agents, but also branches, replicas, threads, and the
+parallel programmers around them.
+
+Triggers:
+
+- About to spawn a second AI agent (parallel session, cloud
+  routine, headless verifier) against a shared repo.
+- Two sessions report different facts about the same ticket,
+  Radar, record, or file.
+- About to claim work is "fixed" or "done" while the change
+  lives only on a branch / worktree / replica that not every
+  consumer can see.
+- A cold reviewer (human or AI agent) arrives and there's no
+  field in the artifact saying which version the prior
+  verdicts were cast against.
+- A merge surfaces work you didn't know existed.
+- Distributed replicas of the same record disagree.
+- The user says "I thought this was fixed — why is your
+  session showing it as not fixed?"
+- Designing a system multiple actors will read and write
+  concurrently.
+- Tempted to fix concurrent-actor pain by "merge fast" or
+  "one writer at a time" rather than by making divergence
+  legible.
+
+**The skill teaches:** modern software runs in many
+simultaneously-valid timelines (branches, replicas, sessions,
+threads, agents), and AI-agentic programming makes divergence
+the common case rather than the edge case. The design
+pattern is one *common central artifact where divergence is
+detectable* — a reconciliation point every actor reads.
+For local methodologies the artifact is usually a contract
+file (a Radar markdown, a ticket); for distributed systems
+it's a registry, vector clock, or consensus log. Carry
+content state alongside workflow state, tag every claim with
+the version it was made against, push truth onto disk
+because AI agents lack out-of-band channels.
+
 ### → Load `ReplaceDontRefactor`
 
 When the work involves **an existing approach that's
