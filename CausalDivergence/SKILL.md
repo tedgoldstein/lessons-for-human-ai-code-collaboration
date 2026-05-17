@@ -1,6 +1,6 @@
 ---
 name: causal-divergence
-description: Modern software runs across multiple simultaneously-valid views of state — git branches, distributed replicas, concurrent sessions, concurrent threads, simulations, multiple programmers, and (the new and most frequent case) multiple AI agents. These views can disagree without either being wrong. The design pattern is *not* to force one absolute truth; it is to designate **one common central artifact where divergence is detectable** — a reconciliation point every actor reads. For local agentic work that artifact is usually a contract file (a Radar markdown, a workflow ticket); for federated systems it is a registry, a vector clock, a consensus log. Load this skill when spawning parallel agents, when two sessions report different facts about the same state, when a cold reviewer arrives, or when designing a system that multiple actors will read and write concurrently.
+description: Modern software runs across multiple simultaneously-valid views of state — git branches, distributed replicas, concurrent sessions, concurrent threads, simulations, multiple programmers, and (the new and most frequent case) multiple AI agents. These views can disagree without either being wrong. The design pattern is *not* to force one absolute truth; it is to designate **one common central artifact where divergence is detectable** — a reconciliation point every actor reads. For local agentic work that artifact is usually a contract file (a Trackfile / Radar / workflow ticket); for federated systems it is a registry, a vector clock, a consensus log. Load this skill when spawning parallel agents, when two sessions report different facts about the same state, when a cold reviewer arrives, or when designing a system that multiple actors will read and write concurrently.
 version: 0.1.0
 ---
 
@@ -74,7 +74,7 @@ Three implementations, sized to the system:
 
 | System scope | Reconciliation point | What it carries |
 |---|---|---|
-| **Local file-based methodology** (Radar, Apple Radar, Jira-like tickets, design docs) | The ticket / Radar / spec markdown file | Content-state fields: which commit(s) implement the work, which trunks have absorbed them, which SHA each verdict was cast against. See the Radar `## Commit` / `## Integration state` example in [worked example](#worked-example) below. |
+| **Local file-based methodology** (Track / Radar, Apple Radar, Jira-like tickets, design docs) | The ticket / Trackfile / spec markdown file | Content-state fields: which commit(s) implement the work, which trunks have absorbed them, which SHA each verdict was cast against. See the Trackfile `## Commit` / `## Integration state` example in [worked example](#worked-example) below. |
 | **Git itself** (multi-branch, multi-worktree development) | The commit DAG | Parent SHAs, branch refs, merge commits. Always present; consult it. `git log --all --grep <id>` is the cold-reader recovery move. |
 | **Distributed system** (replicas, federated services, multi-region) | A registry, vector clock, version vector, consensus log, CRDT metadata | "What does each replica know about each other replica's state, and as of when?" |
 
@@ -254,10 +254,17 @@ synchronize. That is the modern default; it isn't every system.
 
 ## Worked example
 
-A user is driving the Radar methodology — a markdown-file-per-ticket
+> The example below describes events from May 2026 in the project
+> then called *Radar* and since renamed *Track* (Trackfile / Tracks/
+> / Tracker.app — see [tedgoldstein/radar](https://github.com/tedgoldstein/radar)
+> master Trackfile `7j4aw332` for the rename rationale). The paths
+> in the narrative reflect the post-rename layout (`Tracks/<id>.md`,
+> `claude/track/<id>`); the events themselves predated those names.
+
+A user is driving the Track methodology — a markdown-file-per-ticket
 system — with two concurrent Claude sessions. Session A is on a laptop
-in a git worktree at `.claude/worktrees/claude+radar+1tbhk4x6`, on
-branch `claude/radar/1tbhk4x6`. It has just committed a fix for the
+in a git worktree at `.claude/worktrees/claude+track+1tbhk4x6`, on
+branch `claude/track/1tbhk4x6`. It has just committed a fix for the
 bug (commit SHA `6cc0ab6`). The main tree at `/Users/.../Code/radar`
 is on branch `plugin-experiment`, which does not yet carry the fix.
 
@@ -268,14 +275,14 @@ second session:
 1. Reads `consumers/radar.html/radar-detail.jsx` in its checkout. It
    sees the un-patched code — the conditional rendering that destroys
    xterm.js scrollback on subtab switch. Source says "not fixed."
-2. Reads `Radar/1tbhk4x6.md` in its checkout. It sees `Status: open`,
+2. Reads `Tracks/1tbhk4x6.md` in its checkout. It sees `Status: open`,
    `Running: Waiting`, EngineeringVerify pending, no Verify-history
    entries. Workflow state says "not fixed."
 3. Concludes "the bug is not fixed" and proposes to implement the fix.
 
 The user pushes back: "I thought this was fixed. I'm here just to
 verify." The second session runs `git log --all --grep 1tbhk4x6`,
-discovers commit `6cc0ab6` exists on `claude/radar/1tbhk4x6` (a
+discovers commit `6cc0ab6` exists on `claude/track/1tbhk4x6` (a
 worktree it didn't check), and recovers: "Got it — I had a stale
 picture."
 
@@ -283,16 +290,16 @@ picture."
 and workflow state was correct *for its checkout*. The methodology
 never said "before claiming a fix is or isn't present, consult the
 reconciliation point that says which branch / commit carries it" —
-because there was no such field. The Radar markdown carried workflow
+because there was no such field. The Trackfile carried workflow
 state (`Status`, `Running`, verdicts) but no content state. The two
 sessions held two valid timelines; the contract had no place where
 their relationship could be detected.
 
-**Fix.** Add to the Radar template — the file every actor reads:
+**Fix.** Add to the Trackfile template — the file every actor reads:
 
 - `## Commit` — table: `SHA | branch | date | summary`. Every commit
-  implementing this Radar gets a row. The cold reader knows where the
-  fix lives without running git plumbing.
+  implementing this Trackfile gets a row. The cold reader knows where
+  the fix lives without running git plumbing.
 - `## Integration state` — table: `trunk | last-merge-SHA |
   as-of-date | how`. Which trunks carry the fix as of when. The cold
   reader knows whether their checkout has the fix.
@@ -301,10 +308,10 @@ their relationship could be detected.
   `6cc0ab6` is not automatically valid against `7f1aabc`; staleness is
   detectable.
 
-The Radar markdown is now the reconciliation point. The next cold
-session opens the file, reads `## Commit`, and knows immediately
-where the fix lives. No `git log --all` archaeology. No silent
-divergence. No re-implementation of a fix that already exists.
+The Trackfile is now the reconciliation point. The next cold session
+opens the file, reads `## Commit`, and knows immediately where the
+fix lives. No `git log --all` archaeology. No silent divergence. No
+re-implementation of a fix that already exists.
 
 **Generalization.** The same shape applies anywhere actors operate on
 shared state asynchronously. The reconciliation point is whatever
