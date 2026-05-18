@@ -149,6 +149,20 @@ The PR isn't the unit of work. The merged change is the unit
 of work. PRs only matter inasmuch as they make those merged
 changes good.
 
+## See also
+
+- [OrganisingGitPullRequests](../OrganisingGitPullRequests/SKILL.md)
+  — once a branch is small and short-lived, the next
+  question is the *shape* of its commits before review.
+- [CommitHygiene](../CommitHygiene/SKILL.md) — per-commit
+  discipline (staging, messages, force-push policy) inside
+  the small branches this skill recommends.
+- [PushIsPublication](../PushIsPublication/SKILL.md) — small
+  batches is about PR size; push-deliberately is about
+  individual publication cadence. They compose.
+- [OneChangeAtATime](../OneChangeAtATime/SKILL.md) — the
+  scope-discipline a small batch needs at the commit level.
+
 ## Sources
 
 The "small short-lived branches, branch-from-main, stacked PRs

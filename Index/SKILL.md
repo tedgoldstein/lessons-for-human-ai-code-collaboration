@@ -113,6 +113,37 @@ when to use `--amend` vs interactive rebase vs new-branch-+-
 cherry-pick vs `git absorb`, and how to think about the three
 recurring debates (force-push, squash, valid-at-every-commit).
 
+### → Load `CommitHygiene`
+
+When the work involves **making a commit or a push** — the
+two everyday acts whose discipline determines whether the
+history is usable later.
+
+Triggers:
+
+- About to `git add -A` or `git commit -am "stuff"`.
+- About to commit directly to `main` because "it's just a
+  small fix."
+- A commit message would be `wip`, `fix`, `update`, `done`,
+  or `stuff`.
+- A diff includes `.env`, build artifacts, `node_modules/`,
+  IDE settings, or stray `console.log` debug output.
+- About to push without anyone (human or otherwise) having
+  seen the diff.
+- About to force-push to overwrite a prior push.
+- An AI agent is about to commit + push autonomously.
+- `git log --oneline` shows commits whose intent isn't
+  recoverable from the message.
+
+**The skill teaches:** commit is permanent; push is public.
+Stage explicitly (named paths, not sweeping flags). Write
+the message so future-you can read `git log` and learn
+something. Use a feature branch + PR rather than committing
+to `main`. Treat commit and push as two separate approvals.
+Pairs with `PushIsPublication` (cadence),
+`OneChangeAtATime` (scope per commit), and
+`OrganisingGitPullRequests` (reshaping before review).
+
 ### → Load `LocalAWSenvironmentUsingLocalstack`
 
 When the work involves **a service that depends on AWS** and the
