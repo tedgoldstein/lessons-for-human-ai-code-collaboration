@@ -65,6 +65,8 @@ the current situation needs.
 | [PushIsPublication](PushIsPublication/SKILL.md) | Local commits are cheap and reversible. `git push` is publication — triggers CI, makes work visible to other sessions, harder to rewrite. Commit reflexively, push deliberately. Complements (doesn't contradict) `SmallBatchCommitsMergedOften`. |
 | [GrammarIsAlsoAPI](GrammarIsAlsoAPI/SKILL.md) | Beyond identifier names, the *grammar* of commands — verb forms, sigils, casing, phrasing — is a UX surface. Self-identifying identifiers (`R<body>`) admit precise regex matching and survive in prose. Permissive in input, canonical in output. |
 | [AskExactlyWhenAmbiguous](AskExactlyWhenAmbiguous/SKILL.md) | Under autonomous scope ("work largely unsupervised"), default proceed for reversible local decisions; pause for hard-to-reverse, externally-visible, or under-specified ones. Over-confirming is friction; silent deciding the wrong thing is worse. |
+| [SymptomsRevealRootCauses](SymptomsRevealRootCauses/SKILL.md) | A small symptom (an unexpected prompt, a flaky test, a one-off error) is usually a window into a deeper architectural or environmental cause. Trace upstream — surface → behaviour → mechanism → architecture → assumption — until you find structure. Fresh-clone / fresh-env is a cheap probe for distinguishing drift from architecture. |
+| [Sharpen](Sharpen/SKILL.md) | Mid-session reflective pass on the skill library itself. Score the skills that fired this session, sharpen the dull ones in place (tighter triggers, missing failure modes), and scaffold new skills for recurring gaps. The session is perishable evidence — spend it on the library. |
 
 ## Why human-AI specifically
 
