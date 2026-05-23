@@ -62,6 +62,12 @@ its work visible. Both compatible.
   work.
 - You're operating in a multi-Claude-session repo where another
   session might react to your push.
+- You're about to push without having just run the project's
+  test suite. Local commits are reversible; pushed regressions
+  are visible. The right order is **test → push**, not
+  **push → test → fix-forward**. If the test suite is too slow
+  for every push, push to a `claude/*` branch first and only
+  promote to `main` after the slow suite is green.
 
 ## The shape
 
@@ -164,6 +170,18 @@ its work visible. Both compatible.
   fails, I'll fix it." This makes CI the review surface
   and treats pushed-and-broken as the normal state.
   Better: review locally, then push, then CI confirms.
+- **Push-then-test-then-fix-forward.** Pushing before
+  running the full local test suite, then discovering a
+  regression and shipping a fix-forward commit. The
+  intermediate broken state is now permanently in
+  `origin/main` history; anyone who pulled in that
+  window saw the regression. The right order is
+  **test → push**; if the suite is too slow, push to a
+  `claude/*` branch first and promote to `main` only after
+  the slow suite is green. (Observed 2026-05-23 with the
+  `track land` rollout: `MasterChildParserTests` was
+  failing pre-existing, the push went out anyway, and a
+  follow-up Track had to fix-forward.)
 - **Push as a save mechanism.** "I push so I don't lose
   my work." git is local; commits are persistent on
   your laptop. Push is for *publication*. If laptop
