@@ -11,6 +11,16 @@ skill to load when a recognisable situation appears. Each entry lists
 concrete triggers — phrases, symptoms, or tasks. When you see one,
 load the named skill.
 
+> **Note on the bootstrap.** The standing discipline that says
+> *check before every engineering action* lives in
+> [`UsingLessons/SKILL.md`](../UsingLessons/SKILL.md). This
+> Index is the catalog `UsingLessons` consults. Under a native
+> `.claude/skills/` install, the harness surfaces every skill's
+> description at session start and `UsingLessons` directs the
+> agent to match against those; under a cloned-reference
+> install where descriptions aren't surfaced, this Index *is*
+> what `UsingLessons` matches against.
+
 The triggers are *symptoms* you might notice or *phrases* the user
 might say, not categories of file or task. Read them as: "if any of
 these is happening, load this skill."

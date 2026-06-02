@@ -329,6 +329,11 @@ on the path every actor already takes**.
 
 ## See also
 
+- [UsingLessons](../UsingLessons/SKILL.md) — the announce-on-load
+  ritual it mandates is the same legibility pattern applied to
+  *skill routing* that this skill applies to *state*: put the
+  claim on a surface other actors can read, so divergence (or
+  the absence of routing) is detectable rather than silent.
 - [MultiAICollaborationViaGit](../MultiAICollaborationViaGit/SKILL.md)
   — the operational-hygiene companion. That skill is about *how* AI
   sessions coordinate through git (branch conventions, scope rules,

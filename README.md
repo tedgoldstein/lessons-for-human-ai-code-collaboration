@@ -35,7 +35,8 @@ the current situation needs.
 
 | Skill | One-liner |
 |---|---|
-| **[Index](Index/SKILL.md)** | **Routing — when to load which skill.** Read / load first. |
+| **[UsingLessons](UsingLessons/SKILL.md)** | **Bootstrap discipline — before any engineering action, check whether a lesson applies, load it, announce it, follow it.** Load first. |
+| **[Index](Index/SKILL.md)** | **Routing catalog — concrete trigger phrases per skill.** Consulted by `UsingLessons` when descriptions aren't surfaced natively. |
 | [DontReinventTheWheel](DontReinventTheWheel/SKILL.md) | Recognise when a custom thing you're building is isomorphic to a mature platform — map onto the platform instead of rebuilding it. |
 | [MultiLevelTesting](MultiLevelTesting/SKILL.md) | Combine many unit tests, fewer integration tests, fewer E2E, and a small set of smoke tests. Each level brings different benefits; together they make a codebase changeable. |
 | [SmallBatchCommitsMergedOften](SmallBatchCommitsMergedOften/SKILL.md) | Favour small, short-lived feature branches that land on main quickly. Smaller PRs review better, conflict less, surface bugs earlier, keep main always shippable. |
@@ -147,9 +148,22 @@ So **the `description` field is the entire routing surface.**
 Every description here is written to carry concrete trigger
 keywords ("Load when about to author a parser…", "after an
 incident whose only signal was `error`…") precisely so a model
-recognises the moment and self-loads. That only works if the
-descriptions are visible to the harness — which is what the
-native install below does.
+recognises the moment and self-loads.
+
+Description-matching is necessary but not sufficient. A model
+won't *check* the descriptions reliably unless something tells
+it to check, every task, at a low threshold. That's what
+[**UsingLessons**](UsingLessons/SKILL.md) does — it's the
+standing discipline that says *before any engineering action,
+ask whether a lesson applies; if one plausibly does, load it,
+announce which one, follow it.* Adapted from the
+`using-superpowers` bootstrap pattern in
+[obra/superpowers](https://github.com/obra/superpowers).
+
+Together the two pieces self-route the library:
+`UsingLessons` makes the agent *check* on every task; the
+trigger-rich descriptions make the check *land* on the right
+skill.
 
 ### As native Claude Code skills (auto-loading — recommended)
 

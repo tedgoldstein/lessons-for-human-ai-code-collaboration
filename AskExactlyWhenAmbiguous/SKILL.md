@@ -280,6 +280,12 @@ collaboration.
 
 ## See also
 
+- [UsingLessons](../UsingLessons/SKILL.md) — the sibling
+  discipline that governs *internal* skill loading. The two
+  cover opposite directions of agent action: load skills
+  eagerly (cheap, reversible, internal), interrupt the user
+  reservedly (expensive, externally-visible). Don't conflate
+  the thresholds.
 - [CaptureInClustersTriageLater](../CaptureInClustersTriageLater/SKILL.md)
   — when the user is filing ideas rapidly, capture without
   triaging-mid-stream. That's a *don't pause* moment.
