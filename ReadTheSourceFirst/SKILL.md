@@ -151,6 +151,21 @@ You're not reading a library cover-to-cover. You're answering
 The thing on your machine is the source of truth. Everything
 else (docs, posts, issues, threads) is downstream.
 
+## See also
+
+- [DontReinventTheWheel](../DontReinventTheWheel/SKILL.md)
+  — recognising that your problem is isomorphic to a
+  platform's existing shape requires reading the
+  platform first; the marketing summary won't tell you.
+- [BoringTechWherePossible](../BoringTechWherePossible/SKILL.md)
+  — boring tools have readable, navigable source you
+  can actually open when the abstraction leaks; that
+  navigability is part of what makes them boring.
+- [TheBisectMindset](../TheBisectMindset/SKILL.md) —
+  both are diagnostic disciplines that out-perform
+  reading docs and Stack Overflow; the artifact in front
+  of you knows more than any summary of it.
+
 ## Sources
 
 Distilled from general engineering practice; echoes the

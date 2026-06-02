@@ -142,6 +142,25 @@ function for a decision.
 A spike is not a state of being. It's a budget with a
 deliverable at the end.
 
+## See also
+
+- [ReplaceDontRefactor](../ReplaceDontRefactor/SKILL.md)
+  — both are about recognising when to stop pushing on
+  the current shape; the spike's clock is one of the
+  signals that the shape itself is the problem.
+- [PolishWhenLoadBearing](../PolishWhenLoadBearing/SKILL.md)
+  — the same timing discipline applied to
+  infrastructure investment; the spike decides what's
+  worth carrying past the budget.
+- [CaptureInClustersTriageLater](../CaptureInClustersTriageLater/SKILL.md)
+  — what to do with the ideas a spike surfaces but
+  isn't going to pursue; the off-ramp for
+  out-of-scope discoveries.
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — formality calibration for a spike versus
+  production code; a timeboxed experiment runs at the
+  improvisational end on purpose.
+
 ## Sources
 
 Distilled from general engineering practice; echoes

@@ -141,6 +141,22 @@ know what will happen.
 Names are how the next reader navigates your code. Make
 navigation easy.
 
+## See also
+
+- [GrammarIsAlsoAPI](../GrammarIsAlsoAPI/SKILL.md) — the
+  next layer up: once the identifiers are right, the
+  grammar of invocation (argument order, required vs
+  optional, builder vs flat call) is the next surface
+  the caller reads.
+- [MakeTheWrongThingHard](../MakeTheWrongThingHard/SKILL.md)
+  — names are the cheapest layer of making wrong usage
+  obviously wrong; what a name can't carry, the type
+  system or API shape has to.
+- [TheContractIsTheArtifact](../TheContractIsTheArtifact/SKILL.md)
+  — the contract's vocabulary outlives any single tool
+  that reads it; the names you pick today are what the
+  next decade's tooling will key off.
+
 ## Sources
 
 Distilled from general engineering practice; echoes Clean Code

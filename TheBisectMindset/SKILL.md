@@ -180,6 +180,24 @@ historical commit. Habits that preserve this:
 Bisect doesn't need you to be smart. It needs you to be
 able to say "good" or "bad."
 
+## See also
+
+- [OneChangeAtATime](../OneChangeAtATime/SKILL.md) —
+  single-intent commits are the precondition for bisect
+  landing on a SHA that actually explains the failure
+  rather than a bundle you still have to unpack.
+- [CommitHygiene](../CommitHygiene/SKILL.md) — clean
+  messages let the bisected commit explain itself
+  without a second round of archaeology.
+- [OrganisingGitPullRequests](../OrganisingGitPullRequests/SKILL.md)
+  — reshape mid-branch history before review so the
+  merged result is bisectable, not a wall of WIP
+  commits.
+- [MultiLevelTesting](../MultiLevelTesting/SKILL.md) —
+  bisect only pays off when every level of the test
+  pyramid is runnable at every commit; otherwise the
+  good/bad signal goes missing partway through.
+
 ## Sources
 
 Distilled from general engineering practice; the

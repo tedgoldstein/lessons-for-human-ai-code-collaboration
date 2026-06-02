@@ -119,6 +119,22 @@ removes one cohesive effect.
 The bisect / revert / review machinery only works as well as your
 commits do. Bundled commits silently break all three.
 
+## See also
+
+- [TheBisectMindset](../TheBisectMindset/SKILL.md) —
+  bisect only lands on a useful commit when each commit
+  represents a single intent; this skill is the
+  precondition that makes that machinery pay off.
+- [CommitHygiene](../CommitHygiene/SKILL.md) — the
+  per-commit craft (staging, messages, author identity)
+  inside which this scope rule operates.
+- [SmallBatchCommitsMergedOften](../SmallBatchCommitsMergedOften/SKILL.md)
+  — the branch-level analogue: small scope per PR is
+  the same discipline applied one tier up.
+- [OrganisingGitPullRequests](../OrganisingGitPullRequests/SKILL.md)
+  — reshaping mid-branch history toward this rule
+  before review, when the commits arrived bundled.
+
 ## Sources
 
 Distilled from general engineering practice; pairs with
