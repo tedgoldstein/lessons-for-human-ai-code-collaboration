@@ -1,6 +1,6 @@
 ---
 name: push-is-publication
-description: Local commits are cheap and reversible. `git push` is publication — once on origin, CI runs, deploys trigger, downstream consumers may act on it, other sessions see it as truth. In AI-augmented workflows especially, where an AI may generate many commits autonomously, treat push as a deliberate review-then-publish checkpoint, not a reflex that follows every commit. The discipline complements (doesn't contradict) "small batches merged often" — small batches are about *what's in a PR*; this skill is about *when a branch becomes visible*.
+description: Local commits are cheap and reversible; `git push` is publication — once on origin, CI runs, deploys trigger, downstream consumers may act on it, and other sessions see it as truth. In AI-augmented workflows where an agent may generate many commits autonomously, treat push as a deliberate review-then-publish checkpoint, not a reflex after every commit. Load when an AI is generating commits autonomously and you're considering auto-push, when tempted to add a post-commit push hook, when multiple sessions might trigger CI in racing ways, or when an AI just pushed a change you wanted to review locally first. Complements "small batches merged often" — that is about PR size, this about publication cadence.
 version: 0.1.0
 ---
 

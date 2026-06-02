@@ -129,17 +129,52 @@ name.
 
 ## Using the library
 
-There are two intended use modes:
+There are three intended use modes. The first is the one that
+makes the agent *self-select* the right lesson with no manual
+routing; the others are fallbacks.
 
-### As a Claude / Claude Code skill set
+### How an agent decides which skill to load
 
-Clone this library somewhere your project can reference it (a
-submodule, a sibling directory, or `~/.claude/skills/`), then
-in your `CLAUDE.md` (project or user-level) add a preamble
-that points at the `Index/SKILL.md` and instructs the agent
-to consult it before acting.
+A model does not load all skills, and it shouldn't need you to
+name one. The Agent Skills mechanism uses **progressive
+disclosure**: at session start the harness reads only the
+`name` + `description` from each skill's frontmatter — cheap,
+a few hundred tokens for the whole library. The model scans
+those descriptions and, when one matches the situation in
+front of it, loads that skill's full `SKILL.md` on demand.
 
-Concrete example — as a sibling directory:
+So **the `description` field is the entire routing surface.**
+Every description here is written to carry concrete trigger
+keywords ("Load when about to author a parser…", "after an
+incident whose only signal was `error`…") precisely so a model
+recognises the moment and self-loads. That only works if the
+descriptions are visible to the harness — which is what the
+native install below does.
+
+### As native Claude Code skills (auto-loading — recommended)
+
+Install the lessons where the harness discovers skills, so
+their descriptions are surfaced automatically and the model
+self-routes:
+
+```bash
+# project-level (team-shared, travels with the repo)
+git clone https://github.com/tedgoldstein/lessons-for-human-ai-code-collaboration \
+  /tmp/lessons && cp -r /tmp/lessons/*/ .claude/skills/
+
+# or user-level (applies to all your projects)
+cp -r /tmp/lessons/*/ ~/.claude/skills/
+```
+
+No `CLAUDE.md` preamble required — the agent sees every
+description at session start and loads the matching skill when
+a trigger fires. This is the "besides loading all or being
+told" path: description-matching does the routing.
+
+### As an Index-routed reference (no install)
+
+If you'd rather not install them as skills, clone the library
+as a sibling directory and point `CLAUDE.md` at the Index:
 
 ```bash
 git clone https://github.com/tedgoldstein/lessons-for-human-ai-code-collaboration \

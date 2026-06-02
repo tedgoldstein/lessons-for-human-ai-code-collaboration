@@ -1,6 +1,6 @@
 ---
 name: multi-level-testing
-description: Build confidence with a pyramid of tests at multiple levels — many unit tests, fewer integration tests, fewer end-to-end, a small set of smoke tests. Each level brings different benefits; combining them yields high-confidence software. Tests also act as documentation, design feedback, regression guards, and the safety net that makes refactoring possible.
+description: Build confidence with a pyramid of tests — many unit, fewer integration, fewer end-to-end, a few smoke; each level brings different benefits and together they make a codebase changeable while doubling as documentation, design feedback, and a refactoring safety net. Load when deciding how to test something, when weighing whether to mock a dependency, after a bug shipped that the tests didn't catch, when CI is slow (only E2E) or untrustworthy (only mocks), or when someone proposes testing at a single level.
 version: 0.1.0
 ---
 

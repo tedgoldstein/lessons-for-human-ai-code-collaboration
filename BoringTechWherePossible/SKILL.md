@@ -1,6 +1,6 @@
 ---
 name: boring-tech-where-possible
-description: At the bottom of your stack, pick mature, well-supported tools — Postgres, SQLite, Redis, Linux, established languages, established frameworks. Reserve your novelty budget for the actual problem you're solving. Every dependency you adopt costs you operational complexity for years; mature tools come with manuals, hires, war stories, and fewer surprises.
+description: At the bottom of your stack, pick mature, well-supported tools — Postgres, SQLite, Redis, Linux, established languages and frameworks — and reserve your novelty budget for the actual product. Mature tools come with manuals, hires, war stories, and bounded surprise. Load when choosing a foundational tool (database, queue, language, framework, OS), when tempted to adopt a months-old framework as a service's foundation, when someone proposes a rewrite in the language of the month, or when a production incident traces to an obscure dependency with no Stack Overflow hits.
 version: 0.1.0
 ---
 

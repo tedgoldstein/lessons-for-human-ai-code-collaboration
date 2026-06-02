@@ -1,6 +1,6 @@
 ---
 name: small-batch-commits-merged-often
-description: Favour small, short-lived feature branches that land on main quickly. Smaller changes are easier to review, less likely to merge-conflict, and more likely to surface design problems early. A PR doesn't have to be a complete user-facing feature — incremental, well-tested slices are fine, as long as everything builds and tests pass at every commit.
+description: Favour small, short-lived feature branches that land on main quickly — easier to review, less conflict-prone, quicker to surface design problems; a PR needn't be a whole feature, just a well-tested slice that builds green at every commit. Load when scoping a PR, when a diff has crossed ~500 lines and is still climbing, when a branch has been alive more than a couple of days, when a PR description starts needing "also" and "and", or when long-lived branches are causing painful end-of-sprint merge weeks.
 version: 0.1.0
 ---
 

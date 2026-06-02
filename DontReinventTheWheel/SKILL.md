@@ -1,6 +1,6 @@
 ---
 name: dont-reinvent-the-wheel
-description: Recognize when a custom system you're building is isomorphic to a mature platform, then map onto the platform instead of rebuilding it. The residual — what the platform genuinely can't reach — is your real work; everything else is leverage.
+description: Recognize when a custom system you're building is isomorphic to a mature platform, then map onto the platform instead of rebuilding it; the residual — what the platform genuinely can't reach — is your real work. Load when about to author a parser, renderer, layout engine, query language, schema language, routing system, event bus, or dependency resolver — when a plan sketches a parallel implementation of something HTML+DOM, SQLite, POSIX, ICU, or the language's package manager already solves — or when reaching for hand-rolled auth, OAuth, or session handling.
 version: 0.1.0
 ---
 

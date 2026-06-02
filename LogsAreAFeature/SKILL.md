@@ -1,6 +1,6 @@
 ---
 name: logs-are-a-feature
-description: Treat production logging as a deliberate feature, not as `printf` left behind. Structured (key-value or JSON) so they're queryable; designed at module boundaries so a future incident has signal; correlation IDs threaded through requests; levels used consistently; sensitive data redacted at the source. Logs are the production debugger — design them with the care you'd give an API.
+description: Treat production logging as a deliberate feature, not `printf` left behind — structured and queryable, correlation IDs threaded through requests, levels used consistently, sensitive data redacted at the source. Logs are the production debugger. Load when designing logging for a new service, after an incident whose only signal was `error` with no context, when you can't tell which user or request a log line belongs to, when logs are full of `console.log("here")` from someone's debugging session, or when sensitive data is being logged.
 version: 0.1.0
 ---
 

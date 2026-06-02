@@ -1,6 +1,6 @@
 ---
 name: formal-vs-improvisational
-description: Two styles compete in software — the formal "Yekke" engineer (design first, types everywhere, full coverage) and the improviser (code first, ship the MVP, fix it in prod). Neither is universally right. Match the level of formality to the stakes — high stakes / low reversibility / many consumers → formal; throwaway / single consumer / cheap to redo → improvise. At mid-range stakes, use *automated guardrails* (CI, tests, types, feature flags, idempotency) to buy informality at lower risk. That's the DevOps synthesis: formal infrastructure enables rapid behaviour.
+description: Match the level of formality to the stakes, not to temperament — formal at high stakes / low reversibility / many consumers; improvisational at throwaway / single-consumer / cheap-to-redo; in the wide middle, automated guardrails (CI, tests, types, feature flags, idempotency) buy informality at lower risk — the DevOps synthesis. Load when deciding whether to design-first or code-first or test-now-or-later, when about to write a week of design docs for a one-day spike, when shipping a customer-facing service with zero tests "we'll add later", or when a review rejects a research spike for not matching production conventions.
 version: 0.1.0
 ---
 

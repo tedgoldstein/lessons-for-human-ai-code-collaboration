@@ -1,6 +1,6 @@
 ---
 name: make-the-wrong-thing-hard
-description: Design APIs, modules, and code structure so that incorrect usage is harder than correct usage. Use the type system, encapsulation, builders, scope guards, lints, "must-call" contracts encoded in the language. The user of your code shouldn't have to "remember" to do anything — the API should make remembering unnecessary.
+description: Design APIs and modules so incorrect usage is harder than correct usage — types, newtypes, sum types, RAII / scope guards, typestates, builders, lints; the caller shouldn't have to remember anything. Load when designing a call site others (or future-you) will use, when a reviewer keeps writing "remember to call close()" or "don't forget to initialise first", when a bug came from passing the wrong kind of string or a swapped boolean argument, or when a README carries "you must call X before Y" warnings.
 version: 0.1.0
 ---
 

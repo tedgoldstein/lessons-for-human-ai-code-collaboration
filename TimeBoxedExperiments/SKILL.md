@@ -1,6 +1,6 @@
 ---
 name: time-boxed-experiments
-description: Handle technical uncertainty with a fixed time budget. Before exploring, declare: "I will spend N hours / days on this; at the budget I will either know the answer or pivot." Without a budget, exploration drifts indefinitely. With one, exploration becomes a tool. The point isn't speed; it's protected attention and explicit pivot decisions.
+description: Handle technical uncertainty with a fixed time budget declared up front — a specific question, a fixed N hours/days, success criteria, and pivot options; when the budget elapses, decide (extend, pivot, or done). Load when about to say "let me just try X and see if it works", when a spike has run for weeks with no decision, when estimating something you don't yet understand, when a proof-of-concept is drifting into a half-finished production system, or when you've been deep in a problem for hours and can't tell if you're close.
 version: 0.1.0
 ---
 

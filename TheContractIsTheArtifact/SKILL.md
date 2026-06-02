@@ -1,6 +1,6 @@
 ---
 name: the-contract-is-the-artifact
-description: When a system has both a data contract (file format, schema, protocol) and the tooling that renders/mutates it, design so the **contract** is the durable thing and the tools are drafts. If the contract is cheap to materialize — plain text + git, JSON, YAML, a flat directory of markdown — humans, multiple AIs, scripts, future tools, even strangers with a text editor can all participate. Tools shrink to renderers and mutators of a contract that outlives them.
+description: When a system has both a data contract (file format, schema, protocol) and the tooling that renders/mutates it, make the contract the durable thing and the tools mere renderers; cheap substrates (plain text + git, JSON, YAML, a flat directory of markdown) let humans, multiple AIs, scripts, and future tools all participate without permission. Load when designing a system with both persistent state and a UI/CLI, when tempted to lock canonical data inside one app's private database, when a migration is forced because the storage format is tied to one tool, or when an AI or script must join a workflow whose only surface is a clickable UI.
 version: 0.1.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: polish-when-load-bearing
-description: Don't bring infrastructure to ship-quality before its lack of polish is actually causing problems. Apple Developer signing matters when a second user appears; before that, "ad-hoc local build" is adequate. CI matters when contributors collide; before that, a `just test` script is adequate. The cost of premature polish is twofold — the time spent, and the rigidity it creates (maintenance is now a recurring obligation). Polish when the lack of polish is the limiting factor, not before.
+description: Don't bring infrastructure (CI, signing, notarization, monitoring, release scripts) to ship-quality before its lack is actually causing problems; premature polish costs both the time and the rigidity of a recurring maintenance obligation. Polish when the lack of polish is the limiting factor, not before. Load when about to add CI / signing / monitoring before the thing being shipped has stabilized, when a polish task is taking longer than the work it's meant to enable, when a new contributor proposes heavyweight process for a pre-product project, or when "best practices" is invoked without naming the problem it solves.
 version: 0.1.0
 ---
 
