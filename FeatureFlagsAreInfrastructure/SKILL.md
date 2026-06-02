@@ -162,6 +162,25 @@ this still relevant?"
 Two switches, not one. The deploy is for engineers; the
 launch is for users.
 
+## See also
+
+- [SmallBatchCommitsMergedOften](../SmallBatchCommitsMergedOften/SKILL.md)
+  — flags are what turn long-lived branches into a
+  stream of short, flag-gated PRs that merge to `main`
+  without exposing half-finished work.
+- [IdempotentByDefault](../IdempotentByDefault/SKILL.md)
+  — flipping a flag off under load is a rollback, and
+  rollback only works if the surrounding operations
+  tolerate retry and replay.
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — flags are the canonical guardrail that buys
+  informality: ship improvisationally to 1%, formalise
+  before 100%.
+- [PostmortemsWithoutBlame](../PostmortemsWithoutBlame/SKILL.md)
+  — flags give incidents a one-config-change rollback
+  path, which keeps the postmortem about the design
+  rather than the panic.
+
 ## Sources
 
 Distilled from general engineering practice; echoes the

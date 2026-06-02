@@ -1,6 +1,6 @@
 ---
 name: causal-divergence
-description: Modern software runs across multiple simultaneously-valid views of state — git branches, distributed replicas, concurrent sessions, concurrent threads, simulations, multiple programmers, and (the new and most frequent case) multiple AI agents. These views can disagree without either being wrong. The design pattern is *not* to force one absolute truth; it is to designate **one common central artifact where divergence is detectable** — a reconciliation point every actor reads. For local agentic work that artifact is usually a contract file (a Trackfile / Radar / workflow ticket); for federated systems it is a registry, a vector clock, a consensus log. Load this skill when spawning parallel agents, when two sessions report different facts about the same state, when a cold reviewer arrives, or when designing a system that multiple actors will read and write concurrently.
+description: Modern software runs across many simultaneously-valid views of state — branches, replicas, sessions, threads, and parallel AI agents. These views can disagree without either being wrong. The design pattern is one common central artifact where divergence is detectable — a reconciliation point every actor reads. Load when spawning parallel agents, when sessions report different facts about shared state, when a cold reviewer arrives, or when designing a system multiple actors read and write concurrently.
 version: 0.1.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: multi-ai-collaboration-via-git
-description: When two or more AI coding sessions work on the same repository concurrently — or an AI session and a human work in parallel — git's branch + commit + merge model is the coordination protocol. The sessions share files and history, not state. This skill covers the hygiene: branch conventions per session, never trample uncommitted work, inline context that one session can see and another can't (LOCAL MEMORY rules for headless cloud agents), scope rules that limit blast radius, and how to handle the predictable collisions when two sessions independently reach for the same change.
+description: When two or more AI coding sessions share a repository concurrently — or an AI session and a human work in parallel — git is the coordination protocol. Sessions share files and history, not state. Load when spawning a second session on a live repo, when uncommitted changes appear that you didn't make, when a `git stash` is tempting in a multi-session repo, or when cloud routines need to know rules your laptop session has internalized.
 version: 0.1.0
 ---
 

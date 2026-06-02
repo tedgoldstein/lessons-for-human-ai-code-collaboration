@@ -153,6 +153,24 @@ you write them throughout development, not in a batch at the end.
 A test suite isn't there to prove the code works today. It's
 there so the code can change tomorrow.
 
+## See also
+
+- [OneChangeAtATime](../OneChangeAtATime/SKILL.md) —
+  testability collapses when commits bundle changes;
+  a green pyramid against a multi-intent commit
+  doesn't tell you which intent the test covered.
+- [TheBisectMindset](../TheBisectMindset/SKILL.md) —
+  bisect only lands somewhere useful when every level
+  of test is runnable at every commit; the pyramid
+  pays its diagnostic dividend through bisect.
+- [LocalAWSenvironmentUsingLocalstack](../LocalAWSenvironmentUsingLocalstack/SKILL.md)
+  — the practical home for the AWS-integration tier
+  of the pyramid: real SDK calls, local endpoint.
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — how much testing to invest in is itself a
+  stakes-calibration decision rather than a fixed
+  ceremony.
+
 ## Sources
 
 The pyramid + the "tests as spec / examples / regression guard /

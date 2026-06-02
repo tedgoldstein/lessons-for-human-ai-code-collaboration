@@ -133,10 +133,30 @@ There are two intended use modes:
 
 ### As a Claude / Claude Code skill set
 
-In a project using Claude Code, point at this library's `Index`
-skill at session start (or as a global preamble). The agent will
-consult it before acting and load any specific skill whose
-triggers match the current situation.
+Clone this library somewhere your project can reference it (a
+submodule, a sibling directory, or `~/.claude/skills/`), then
+in your `CLAUDE.md` (project or user-level) add a preamble
+that points at the `Index/SKILL.md` and instructs the agent
+to consult it before acting.
+
+Concrete example — as a sibling directory:
+
+```bash
+git clone https://github.com/tedgoldstein/lessons-for-human-ai-code-collaboration \
+  ../lessons-for-human-ai-code-collaboration
+```
+
+Then in `CLAUDE.md`:
+
+> Before any software-engineering action, read
+> `../lessons-for-human-ai-code-collaboration/Index/SKILL.md`.
+> If any trigger phrase there matches the current situation,
+> load the named skill (`../lessons-for-human-ai-code-collaboration/<SkillName>/SKILL.md`)
+> and follow its guidance.
+
+The Index is the router; downstream skills load on demand. If
+several skills match the situation, load them all — they
+compose.
 
 ### As a human reference
 

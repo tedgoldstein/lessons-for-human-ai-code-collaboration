@@ -157,6 +157,25 @@ a structured-logger for a one-page script.
 Design them while you have the time. You won't, during the
 incident.
 
+## See also
+
+- [PostmortemsWithoutBlame](../PostmortemsWithoutBlame/SKILL.md)
+  — logs are the forensic fuel a postmortem runs on;
+  without them, the postmortem is reconstructed
+  guesswork.
+- [TheContractIsTheArtifact](../TheContractIsTheArtifact/SKILL.md)
+  — a log stream is a durable contract that outlives
+  the service writing it; downstream consumers depend
+  on its shape.
+- [MakeTheWrongThingHard](../MakeTheWrongThingHard/SKILL.md)
+  — redaction and structured fields at the logger
+  layer make logging a secret structurally hard rather
+  than a code-review discipline.
+- [SingleSourceOfTruth](../SingleSourceOfTruth/SKILL.md)
+  — correlation IDs are what make a single event
+  traceable across many systems instead of fragmenting
+  into per-service narratives.
+
 ## Sources
 
 Distilled from general engineering practice; echoes "12-Factor

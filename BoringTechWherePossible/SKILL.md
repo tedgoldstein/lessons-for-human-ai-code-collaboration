@@ -144,6 +144,25 @@ budgeted for:
 The novel thing should be the thing your business *does*, not
 the foundation under it.
 
+## See also
+
+- [DontReinventTheWheel](../DontReinventTheWheel/SKILL.md) —
+  the top-of-stack counterpart; both are leverage
+  disciplines that ask which work is *yours* to do and
+  which has already been done by someone with more time
+  to do it well.
+- [PolishWhenLoadBearing](../PolishWhenLoadBearing/SKILL.md)
+  — when to invest in your foundations at all; choosing
+  mature tools defers that question by inheriting
+  someone else's polish.
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — boring foundations are precisely what lets the
+  product layer above move improvisationally without
+  the substrate moving underneath it.
+- [ReadTheSourceFirst](../ReadTheSourceFirst/SKILL.md) —
+  mature tools have readable, vetted source you can
+  actually navigate when the abstraction leaks.
+
 ## Sources
 
 Distilled from general engineering practice; echoes Dan

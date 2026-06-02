@@ -229,6 +229,23 @@ idempotency — so the work above them can stay informal. Where
 the stakes rise, the formality climbs with them. Where the
 stakes drop, let it fall.
 
+## See also
+
+- [PolishWhenLoadBearing](../PolishWhenLoadBearing/SKILL.md)
+  — the timing counterpart; this skill calibrates *how
+  much* ceremony, that one calibrates *when* the polish
+  is worth paying for.
+- [MultiLevelTesting](../MultiLevelTesting/SKILL.md) —
+  testing intensity is one of the main axes of
+  formality, and the pyramid is itself a stakes-tiered
+  shape.
+- [FeatureFlagsAreInfrastructure](../FeatureFlagsAreInfrastructure/SKILL.md)
+  — the canonical guardrail that lets the product layer
+  stay improvisational at much lower blast radius.
+- [BoringTechWherePossible](../BoringTechWherePossible/SKILL.md)
+  — boring foundations underneath are what make
+  improvisational product work safe in the first place.
+
 ## Sources
 
 Distilled from general engineering practice. The "formal vs

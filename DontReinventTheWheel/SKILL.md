@@ -181,3 +181,22 @@ rebuild.
 
 The mark of a senior engineer is not what they build. It's what they
 recognize they don't have to.
+
+## See also
+
+- [BoringTechWherePossible](../BoringTechWherePossible/SKILL.md)
+  — the paired substrate discipline; one says don't
+  rebuild the platform, the other says pick the platform
+  that's already been worn smooth.
+- [TheContractIsTheArtifact](../TheContractIsTheArtifact/SKILL.md)
+  — cheap, ubiquitous substrates (HTML, JSON, SQL) attract
+  participants without asking permission precisely
+  because the contract is the artifact.
+- [ReadTheSourceFirst](../ReadTheSourceFirst/SKILL.md) —
+  recognising isomorphism between your problem and a
+  mature platform requires knowing the platform's actual
+  shape, not the marketing summary.
+- [MakeTheWrongThingHard](../MakeTheWrongThingHard/SKILL.md)
+  — mature platforms have already encoded most of the
+  "wrong things" as hard; rebuilding loses that
+  accumulated friction.
