@@ -591,6 +591,44 @@ content state alongside workflow state, tag every claim with
 the version it was made against, push truth onto disk
 because AI agents lack out-of-band channels.
 
+### → Load `FluidVsTricky`
+
+When the work involves **deciding build order under
+uncertainty** — whether to build GUI and foundation in
+parallel or collapse to bottom-up — or when noticing a
+mid-task regime shift.
+
+Triggers:
+
+- About to build UI on a foundation whose invariants you
+  can't yet write down.
+- "We keep redoing the same view."
+- You've thrown away the same UI flow twice.
+- The bug diagnosis just named a *class of incident* (a
+  correctness property) rather than a single missed case.
+- The layer in front of you touches concurrency, atomicity,
+  persistence, cryptography, security, or a contract other
+  actors rely on.
+- A senior reviewer would ask factual questions about the
+  layer's behavior, not design-taste questions.
+- Tempted to "ship the GUI and worry about correctness
+  later."
+- A regime shift just happened mid-task and the operator
+  says something like "finish [the foundation piece],
+  commit, push — then back to the UI."
+
+**The skill teaches:** two regimes, two strategies. Fluid
+regime → build GUI + foundation in parallel; each side
+surfaces gaps the other missed. Tricky regime → collapse
+to bottom-up; foundation first; GUI later. The expensive
+mistake is mixing them — keeping the fluid strategy when
+the regime has shifted to tricky burns iterations of UI
+that get thrown away on the next foundation move. Two
+quick tests: (a) can I write down this layer's
+invariants? Yes → fluid; no → tricky. (b) would a senior
+reviewer ask factual or taste questions? Factual →
+tricky; taste → fluid.
+
 ### → Load `ReplaceDontRefactor`
 
 When the work involves **an existing approach that's

@@ -329,6 +329,11 @@ on the path every actor already takes**.
 
 ## See also
 
+- [FluidVsTricky](../FluidVsTricky/SKILL.md) — names the
+  regime shift that causal divergence often triggers. When
+  two actors discover they disagree, the layer they're
+  disagreeing about has just revealed itself as tricky, not
+  fluid; this skill is what to read next.
 - [UsingLessons](../UsingLessons/SKILL.md) — the announce-on-load
   ritual it mandates is the same legibility pattern applied to
   *skill routing* that this skill applies to *state*: put the

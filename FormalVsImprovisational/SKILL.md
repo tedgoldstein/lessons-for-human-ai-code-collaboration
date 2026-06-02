@@ -231,6 +231,12 @@ stakes drop, let it fall.
 
 ## See also
 
+- [FluidVsTricky](../FluidVsTricky/SKILL.md) — a sibling
+  regime-calibration skill, applied to *build order under
+  uncertainty* rather than ceremony level. Both turn on
+  reading the situation correctly; both have the same
+  expensive failure mode (applying the wrong regime's
+  strategy after the regime has shifted).
 - [PolishWhenLoadBearing](../PolishWhenLoadBearing/SKILL.md)
   — the timing counterpart; this skill calibrates *how
   much* ceremony, that one calibrates *when* the polish
