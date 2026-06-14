@@ -988,6 +988,70 @@ is `Track <phaseid>:` (the Phase owns implementation scope), not
 `Master <masterid>:`. The scope hook won't catch a wrong-branch
 commit — discipline is the only barrier.
 
+### → Load `CommitHygiene`
+
+When the work involves **making a commit or a push** — what goes
+into it, what the message says, where it lands, and who saw it
+first.
+
+Triggers:
+
+- About to `git commit -am "stuff"` (or any sweeping all-in add).
+- About to commit directly to `main` because "it's just a small
+  fix."
+- About to push without anyone (human or otherwise) having seen
+  the diff.
+- About to force-push to overwrite a prior push.
+- A commit message says `wip`, `fix`, `update`, `done`, or
+  `stuff`.
+- The diff includes a `.env`, a build artifact, `node_modules/`,
+  IDE settings, or stray `console.log` debug output.
+- A commit's author email is `you@laptop.local` because git
+  config was never set.
+- A `git log --oneline` line gives no clue what the commit did.
+- An AI agent is about to commit + push without explicit user
+  approval.
+
+**The skill teaches:** a commit is a permanent record, a push is a
+public commitment — two operations, two checklists, two approvals.
+Stage explicitly (never sweep secrets / build artifacts in), write
+messages future-you can learn from, branch + PR rather than commit
+to `main`, don't push proactively, and force-push only after asking
+(it overwrites the audit trail). Complements `PushIsPublication`
+(push cadence) and `OrganisingGitPullRequests` (commit shape).
+
+### → Load `FluidVsTricky`
+
+When the work involves **deciding build order under uncertainty** —
+whether to build the GUI and the foundation together or to collapse
+to foundation-first — or diagnosing thrown-away UI work.
+
+Triggers:
+
+- A new feature is "obvious" and requirements are still being
+  shaped by what you discover building (fluid → build both at
+  once).
+- A feature touches concurrency, atomicity, persistence, security,
+  or a contract other actors rely on (tricky → foundation first).
+- A bug's diagnosis names a *class of incident* rather than a
+  single missed case (tricky — that's a correctness-property
+  diagnosis).
+- You've thrown away the same UI flow twice (the foundation isn't
+  ready; stop polishing the surface).
+- You can't write down the invariants the current layer must hold
+  — you're tricky, write them down before building above.
+- A reviewer would ask *factual* questions about a layer's
+  behavior rather than design-taste questions (tricky).
+
+**The skill teaches:** two regimes, two strategies. When fluid,
+build GUI and foundation simultaneously in feedback with each
+other; when tricky (subtle correctness / concurrency / contract
+concerns), collapse to bottom-up, harden the foundation, defer the
+GUI. The mistake is mixing regimes — parallel-building on a tricky
+foundation burns UI work that gets thrown away when the foundation
+shifts. Know which regime you're in, and switch when it changes
+(tricky→fluid is as real as fluid→tricky).
+
 ## How to use this index
 
 1. Read the trigger phrases for each entry; they cover most of
