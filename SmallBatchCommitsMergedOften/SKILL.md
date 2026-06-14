@@ -1,6 +1,6 @@
 ---
 name: small-batch-commits-merged-often
-description: Favour small, short-lived feature branches that land on main quickly. Smaller changes are easier to review, less likely to merge-conflict, and more likely to surface design problems early. A PR doesn't have to be a complete user-facing feature — incremental, well-tested slices are fine, as long as everything builds and tests pass at every commit.
+description: Favour small, short-lived feature branches that land on main quickly — easier to review, less conflict-prone, quicker to surface design problems; a PR needn't be a whole feature, just a well-tested slice that builds green at every commit. Load when scoping a PR, when a diff has crossed ~500 lines and is still climbing, when a branch has been alive more than a couple of days, when a PR description starts needing "also" and "and", or when long-lived branches are causing painful end-of-sprint merge weeks.
 version: 0.1.0
 ---
 
@@ -148,6 +148,20 @@ small PRs.
 The PR isn't the unit of work. The merged change is the unit
 of work. PRs only matter inasmuch as they make those merged
 changes good.
+
+## See also
+
+- [OrganisingGitPullRequests](../OrganisingGitPullRequests/SKILL.md)
+  — once a branch is small and short-lived, the next
+  question is the *shape* of its commits before review.
+- [CommitHygiene](../CommitHygiene/SKILL.md) — per-commit
+  discipline (staging, messages, force-push policy) inside
+  the small branches this skill recommends.
+- [PushIsPublication](../PushIsPublication/SKILL.md) — small
+  batches is about PR size; push-deliberately is about
+  individual publication cadence. They compose.
+- [OneChangeAtATime](../OneChangeAtATime/SKILL.md) — the
+  scope-discipline a small batch needs at the commit level.
 
 ## Sources
 

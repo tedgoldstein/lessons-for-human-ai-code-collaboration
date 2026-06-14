@@ -222,15 +222,30 @@ commit, a small focused diff, a thoughtful message — these
 compound into a codebase that's pleasant to navigate ten
 years later.
 
+## See also
+
+- [PushIsPublication](../PushIsPublication/SKILL.md) — the
+  cadence side of the commit/push split this skill insists
+  on. Commit and push are two acts; this skill governs the
+  craft of each, that one governs *when* push happens.
+- [OneChangeAtATime](../OneChangeAtATime/SKILL.md) — one
+  intent per commit is the scope rule that makes the
+  message writeable in the first place.
+- [SmallBatchCommitsMergedOften](../SmallBatchCommitsMergedOften/SKILL.md)
+  — the branch-lifetime discipline that this skill operates
+  inside.
+- [OrganisingGitPullRequests](../OrganisingGitPullRequests/SKILL.md)
+  — the cross-branch reshaping done before review; commit
+  hygiene is the per-commit craft, this skill is the
+  per-branch reshape.
+- [TheBisectMindset](../TheBisectMindset/SKILL.md) — why
+  single-intent, well-named commits matter downstream:
+  bisect lands on a commit you can actually read.
+
 ## Sources
 
-Distilled from general engineering practice. Pairs closely
-with [OneChangeAtATime](../OneChangeAtATime/SKILL.md) (one
-intent per commit), [SmallBatchCommitsMergedOften](../SmallBatchCommitsMergedOften/SKILL.md)
-(branch lifetime), [OrganisingGitPullRequests](../OrganisingGitPullRequests/SKILL.md)
-(reshape history before review), and [TheBisectMindset](../TheBisectMindset/SKILL.md)
-(why single-intent commits matter). Tim Pope's "A Note About
-Git Commit Messages" (2008) is the canonical English-language
-essay on message style; the Conventional Commits format
-(conventionalcommits.org) is one structured convention layered
-on top.
+Distilled from general engineering practice. Tim Pope's "A
+Note About Git Commit Messages" (2008) is the canonical
+English-language essay on message style; the Conventional
+Commits format (conventionalcommits.org) is one structured
+convention layered on top.

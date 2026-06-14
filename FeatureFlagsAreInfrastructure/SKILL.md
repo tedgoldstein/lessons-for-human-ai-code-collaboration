@@ -1,6 +1,6 @@
 ---
 name: feature-flags-are-infrastructure
-description: Treat feature flags as a first-class deployment tool, not an ad-hoc `if` here and there. Flags decouple "what's deployed" from "what's enabled" — letting big features land in main as inert code, controlled rollout per user/cohort/percent, and one-config rollback when something breaks. Pairs naturally with small batches: long branches become short flag-gated PRs.
+description: Treat feature flags as first-class deployment infrastructure, not an ad-hoc `if` here and there — they decouple "what's deployed" from "what's enabled", let big features land in main as inert code, support per-user/cohort/percent rollout, and give one-config rollback. Load when a feature would otherwise live in a long-running branch, when a risky change needs to ship 1% → 10% → 100%, when a change might need fast rollback without a redeploy, when a multi-step rollout needs coordinated DB + code + cleanup, or when a team is debating "should we deploy this Friday?".
 version: 0.1.0
 ---
 
@@ -161,6 +161,25 @@ this still relevant?"
 
 Two switches, not one. The deploy is for engineers; the
 launch is for users.
+
+## See also
+
+- [SmallBatchCommitsMergedOften](../SmallBatchCommitsMergedOften/SKILL.md)
+  — flags are what turn long-lived branches into a
+  stream of short, flag-gated PRs that merge to `main`
+  without exposing half-finished work.
+- [IdempotentByDefault](../IdempotentByDefault/SKILL.md)
+  — flipping a flag off under load is a rollback, and
+  rollback only works if the surrounding operations
+  tolerate retry and replay.
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — flags are the canonical guardrail that buys
+  informality: ship improvisationally to 1%, formalise
+  before 100%.
+- [PostmortemsWithoutBlame](../PostmortemsWithoutBlame/SKILL.md)
+  — flags give incidents a one-config-change rollback
+  path, which keeps the postmortem about the design
+  rather than the panic.
 
 ## Sources
 

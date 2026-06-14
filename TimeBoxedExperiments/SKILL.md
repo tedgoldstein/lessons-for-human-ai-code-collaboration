@@ -1,6 +1,6 @@
 ---
 name: time-boxed-experiments
-description: Handle technical uncertainty with a fixed time budget. Before exploring, declare: "I will spend N hours / days on this; at the budget I will either know the answer or pivot." Without a budget, exploration drifts indefinitely. With one, exploration becomes a tool. The point isn't speed; it's protected attention and explicit pivot decisions.
+description: Handle technical uncertainty with a fixed time budget declared up front — a specific question, a fixed N hours/days, success criteria, and pivot options; when the budget elapses, decide (extend, pivot, or done). Load when about to say "let me just try X and see if it works", when a spike has run for weeks with no decision, when estimating something you don't yet understand, when a proof-of-concept is drifting into a half-finished production system, or when you've been deep in a problem for hours and can't tell if you're close.
 version: 0.1.0
 ---
 
@@ -141,6 +141,25 @@ function for a decision.
 
 A spike is not a state of being. It's a budget with a
 deliverable at the end.
+
+## See also
+
+- [ReplaceDontRefactor](../ReplaceDontRefactor/SKILL.md)
+  — both are about recognising when to stop pushing on
+  the current shape; the spike's clock is one of the
+  signals that the shape itself is the problem.
+- [PolishWhenLoadBearing](../PolishWhenLoadBearing/SKILL.md)
+  — the same timing discipline applied to
+  infrastructure investment; the spike decides what's
+  worth carrying past the budget.
+- [CaptureInClustersTriageLater](../CaptureInClustersTriageLater/SKILL.md)
+  — what to do with the ideas a spike surfaces but
+  isn't going to pursue; the off-ramp for
+  out-of-scope discoveries.
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — formality calibration for a spike versus
+  production code; a timeboxed experiment runs at the
+  improvisational end on purpose.
 
 ## Sources
 

@@ -1,6 +1,6 @@
 ---
 name: causal-divergence
-description: Modern software runs across multiple simultaneously-valid views of state — git branches, distributed replicas, concurrent sessions, concurrent threads, simulations, multiple programmers, and (the new and most frequent case) multiple AI agents. These views can disagree without either being wrong. The design pattern is *not* to force one absolute truth; it is to designate **one common central artifact where divergence is detectable** — a reconciliation point every actor reads. For local agentic work that artifact is usually a contract file (a Trackfile / Track / workflow ticket); for federated systems it is a registry, a vector clock, a consensus log. Load this skill when spawning parallel agents, when two sessions report different facts about the same state, when a cold reviewer arrives, or when designing a system that multiple actors will read and write concurrently.
+description: Modern software runs across many simultaneously-valid views of state — branches, replicas, sessions, threads, and parallel AI agents. These views can disagree without either being wrong. The design pattern is one common central artifact where divergence is detectable — a reconciliation point every actor reads. Load when spawning parallel agents, when sessions report different facts about shared state, when a cold reviewer arrives, or when designing a system multiple actors read and write concurrently.
 version: 0.1.0
 ---
 
@@ -329,6 +329,16 @@ on the path every actor already takes**.
 
 ## See also
 
+- [FluidVsTricky](../FluidVsTricky/SKILL.md) — names the
+  regime shift that causal divergence often triggers. When
+  two actors discover they disagree, the layer they're
+  disagreeing about has just revealed itself as tricky, not
+  fluid; this skill is what to read next.
+- [UsingLessons](../UsingLessons/SKILL.md) — the announce-on-load
+  ritual it mandates is the same legibility pattern applied to
+  *skill routing* that this skill applies to *state*: put the
+  claim on a surface other actors can read, so divergence (or
+  the absence of routing) is detectable rather than silent.
 - [MultiAICollaborationViaGit](../MultiAICollaborationViaGit/SKILL.md)
   — the operational-hygiene companion. That skill is about *how* AI
   sessions coordinate through git (branch conventions, scope rules,

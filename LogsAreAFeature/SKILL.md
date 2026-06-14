@@ -1,6 +1,6 @@
 ---
 name: logs-are-a-feature
-description: Treat production logging as a deliberate feature, not as `printf` left behind. Structured (key-value or JSON) so they're queryable; designed at module boundaries so a future incident has signal; correlation IDs threaded through requests; levels used consistently; sensitive data redacted at the source. Logs are the production debugger — design them with the care you'd give an API.
+description: Treat production logging as a deliberate feature, not `printf` left behind — structured and queryable, correlation IDs threaded through requests, levels used consistently, sensitive data redacted at the source. Logs are the production debugger. Load when designing logging for a new service, after an incident whose only signal was `error` with no context, when you can't tell which user or request a log line belongs to, when logs are full of `console.log("here")` from someone's debugging session, or when sensitive data is being logged.
 version: 0.1.0
 ---
 
@@ -156,6 +156,25 @@ a structured-logger for a one-page script.
 
 Design them while you have the time. You won't, during the
 incident.
+
+## See also
+
+- [PostmortemsWithoutBlame](../PostmortemsWithoutBlame/SKILL.md)
+  — logs are the forensic fuel a postmortem runs on;
+  without them, the postmortem is reconstructed
+  guesswork.
+- [TheContractIsTheArtifact](../TheContractIsTheArtifact/SKILL.md)
+  — a log stream is a durable contract that outlives
+  the service writing it; downstream consumers depend
+  on its shape.
+- [MakeTheWrongThingHard](../MakeTheWrongThingHard/SKILL.md)
+  — redaction and structured fields at the logger
+  layer make logging a secret structurally hard rather
+  than a code-review discipline.
+- [SingleSourceOfTruth](../SingleSourceOfTruth/SKILL.md)
+  — correlation IDs are what make a single event
+  traceable across many systems instead of fragmenting
+  into per-service narratives.
 
 ## Sources
 

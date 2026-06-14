@@ -205,6 +205,12 @@ and shapeless.
 
 ## See also
 
+- [FluidVsTricky](../FluidVsTricky/SKILL.md) — the cousin
+  discipline of recognising the current strategy is the
+  wrong one. Replace-don't-refactor is the move when the
+  *substrate* is wrong; FluidVsTricky is the move when the
+  *build order* is wrong. Same diagnostic muscle, different
+  axis.
 - [TheContractIsTheArtifact](../TheContractIsTheArtifact/SKILL.md)
   — wave-replacement is cheap precisely when the contract
   (the data shape) is durable. Replace the code that reads

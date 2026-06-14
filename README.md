@@ -35,11 +35,13 @@ the current situation needs.
 
 | Skill | One-liner |
 |---|---|
-| **[Index](Index/SKILL.md)** | **Routing — when to load which skill.** Read / load first. |
+| **[UsingLessons](UsingLessons/SKILL.md)** | **Bootstrap discipline — before any engineering action, check whether a lesson applies, load it, announce it, follow it.** Load first. |
+| **[Index](Index/SKILL.md)** | **Routing catalog — concrete trigger phrases per skill.** Consulted by `UsingLessons` when descriptions aren't surfaced natively. |
 | [DontReinventTheWheel](DontReinventTheWheel/SKILL.md) | Recognise when a custom thing you're building is isomorphic to a mature platform — map onto the platform instead of rebuilding it. |
 | [MultiLevelTesting](MultiLevelTesting/SKILL.md) | Combine many unit tests, fewer integration tests, fewer E2E, and a small set of smoke tests. Each level brings different benefits; together they make a codebase changeable. |
 | [SmallBatchCommitsMergedOften](SmallBatchCommitsMergedOften/SKILL.md) | Favour small, short-lived feature branches that land on main quickly. Smaller PRs review better, conflict less, surface bugs earlier, keep main always shippable. |
 | [OrganisingGitPullRequests](OrganisingGitPullRequests/SKILL.md) | Reshape commits into a coherent story before review. Reviewers can follow the intent; bisect lands on the right commit; revert doesn't drag unrelated files. |
+| [CommitHygiene](CommitHygiene/SKILL.md) | A commit is permanent; a push is public. Stage explicitly, write messages future-you can read, never commit to `main` directly, and treat commit + push as two separate approvals. |
 | [LocalAWSenvironmentUsingLocalstack](LocalAWSenvironmentUsingLocalstack/SKILL.md) | When developing services that talk to AWS, run those services locally via LocalStack rather than mocking, faking, or sharing a dev account. |
 | [OneChangeAtATime](OneChangeAtATime/SKILL.md) | When debugging or shipping, isolate variables. The unit of change should be the unit of investigation. |
 | [MakeTheWrongThingHard](MakeTheWrongThingHard/SKILL.md) | Design APIs so incorrect usage is harder than correct usage — types, RAII, typestates, builders, lints. The user shouldn't have to "remember" anything. |
@@ -58,6 +60,7 @@ the current situation needs.
 | [CommonsWithDivergentClones](CommonsWithDivergentClones/SKILL.md) | Multiple products with shared infrastructure → model the shared kernel as a **commons** in its own repo, with descendant projects as git clones that diverge. Periodic one-way merge from commons → descendants; changes never flow back. |
 | [MultiAICollaborationViaGit](MultiAICollaborationViaGit/SKILL.md) | When two or more AI sessions work on the same repo concurrently, git is the coordination protocol. Branch per session, scope rules, never trample uncommitted work, inline LOCAL MEMORY into cloud-agent prompts, expect predictable collisions. |
 | [CausalDivergence](CausalDivergence/SKILL.md) | Modern software runs across many simultaneously-valid timelines — branches, replicas, sessions, threads, and parallel AI agents. The design pattern is not to force one absolute reality but to designate one common central artifact where divergence is detectable — a reconciliation point every actor reads. AI-agentic programming makes this the common case. |
+| [FluidVsTricky](FluidVsTricky/SKILL.md) | Build-order under uncertainty. *Fluid* regime — design still being shaped by building — build GUI and foundation in parallel, each side surfacing what the other missed. *Tricky* regime — correctness, concurrency, or contract concerns — collapse to bottom-up, foundation first, GUI later. The expensive mistake is keeping the fluid strategy after the regime has shifted to tricky. |
 | [ReplaceDontRefactor](ReplaceDontRefactor/SKILL.md) | When an approach is structurally wrong, refactoring stalls. Tag the old as recoverable, build the new from a fresh root, co-exist briefly, cut over once, delete the old. Wave-replacement, not gradual transform. |
 | [BootstrapByHand](BootstrapByHand/SKILL.md) | When a tool is meant to manage some artifact (issues, schedules, docs) but isn't yet ready to manage itself, fall back to the contract directly. Hand-edit the file. The tool can land later; the work doesn't wait. |
 | [PolishWhenLoadBearing](PolishWhenLoadBearing/SKILL.md) | Don't bring infrastructure (CI, signing, notarization, monitoring) to ship-quality before its lack is actually causing problems. Polish when load-bearing; defer until the trigger fires. The timing-counterpart to `FormalVsImprovisational`. |
@@ -139,14 +142,82 @@ name.
 
 ## Using the library
 
-There are two intended use modes:
+There are three intended use modes. The first is the one that
+makes the agent *self-select* the right lesson with no manual
+routing; the others are fallbacks.
 
-### As a Claude / Claude Code skill set
+### How an agent decides which skill to load
 
-In a project using Claude Code, point at this library's `Index`
-skill at session start (or as a global preamble). The agent will
-consult it before acting and load any specific skill whose
-triggers match the current situation.
+A model does not load all skills, and it shouldn't need you to
+name one. The Agent Skills mechanism uses **progressive
+disclosure**: at session start the harness reads only the
+`name` + `description` from each skill's frontmatter — cheap,
+a few hundred tokens for the whole library. The model scans
+those descriptions and, when one matches the situation in
+front of it, loads that skill's full `SKILL.md` on demand.
+
+So **the `description` field is the entire routing surface.**
+Every description here is written to carry concrete trigger
+keywords ("Load when about to author a parser…", "after an
+incident whose only signal was `error`…") precisely so a model
+recognises the moment and self-loads.
+
+Description-matching is necessary but not sufficient. A model
+won't *check* the descriptions reliably unless something tells
+it to check, every task, at a low threshold. That's what
+[**UsingLessons**](UsingLessons/SKILL.md) does — it's the
+standing discipline that says *before any engineering action,
+ask whether a lesson applies; if one plausibly does, load it,
+announce which one, follow it.* Adapted from the
+`using-superpowers` bootstrap pattern in
+[obra/superpowers](https://github.com/obra/superpowers).
+
+Together the two pieces self-route the library:
+`UsingLessons` makes the agent *check* on every task; the
+trigger-rich descriptions make the check *land* on the right
+skill.
+
+### As native Claude Code skills (auto-loading — recommended)
+
+Install the lessons where the harness discovers skills, so
+their descriptions are surfaced automatically and the model
+self-routes:
+
+```bash
+# project-level (team-shared, travels with the repo)
+git clone https://github.com/tedgoldstein/lessons-for-human-ai-code-collaboration \
+  /tmp/lessons && cp -r /tmp/lessons/*/ .claude/skills/
+
+# or user-level (applies to all your projects)
+cp -r /tmp/lessons/*/ ~/.claude/skills/
+```
+
+No `CLAUDE.md` preamble required — the agent sees every
+description at session start and loads the matching skill when
+a trigger fires. This is the "besides loading all or being
+told" path: description-matching does the routing.
+
+### As an Index-routed reference (no install)
+
+If you'd rather not install them as skills, clone the library
+as a sibling directory and point `CLAUDE.md` at the Index:
+
+```bash
+git clone https://github.com/tedgoldstein/lessons-for-human-ai-code-collaboration \
+  ../lessons-for-human-ai-code-collaboration
+```
+
+Then in `CLAUDE.md`:
+
+> Before any software-engineering action, read
+> `../lessons-for-human-ai-code-collaboration/Index/SKILL.md`.
+> If any trigger phrase there matches the current situation,
+> load the named skill (`../lessons-for-human-ai-code-collaboration/<SkillName>/SKILL.md`)
+> and follow its guidance.
+
+The Index is the router; downstream skills load on demand. If
+several skills match the situation, load them all — they
+compose.
 
 ### As a human reference
 

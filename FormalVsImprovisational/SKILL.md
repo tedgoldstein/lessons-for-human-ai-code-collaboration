@@ -1,6 +1,6 @@
 ---
 name: formal-vs-improvisational
-description: Two styles compete in software — the formal "Yekke" engineer (design first, types everywhere, full coverage) and the improviser (code first, ship the MVP, fix it in prod). Neither is universally right. Match the level of formality to the stakes — high stakes / low reversibility / many consumers → formal; throwaway / single consumer / cheap to redo → improvise. At mid-range stakes, use *automated guardrails* (CI, tests, types, feature flags, idempotency) to buy informality at lower risk. That's the DevOps synthesis: formal infrastructure enables rapid behaviour.
+description: Match the level of formality to the stakes, not to temperament — formal at high stakes / low reversibility / many consumers; improvisational at throwaway / single-consumer / cheap-to-redo; in the wide middle, automated guardrails (CI, tests, types, feature flags, idempotency) buy informality at lower risk — the DevOps synthesis. Load when deciding whether to design-first or code-first or test-now-or-later, when about to write a week of design docs for a one-day spike, when shipping a customer-facing service with zero tests "we'll add later", or when a review rejects a research spike for not matching production conventions.
 version: 0.1.0
 ---
 
@@ -228,6 +228,29 @@ Build formal foundations — CI, tests, types, feature flags,
 idempotency — so the work above them can stay informal. Where
 the stakes rise, the formality climbs with them. Where the
 stakes drop, let it fall.
+
+## See also
+
+- [FluidVsTricky](../FluidVsTricky/SKILL.md) — a sibling
+  regime-calibration skill, applied to *build order under
+  uncertainty* rather than ceremony level. Both turn on
+  reading the situation correctly; both have the same
+  expensive failure mode (applying the wrong regime's
+  strategy after the regime has shifted).
+- [PolishWhenLoadBearing](../PolishWhenLoadBearing/SKILL.md)
+  — the timing counterpart; this skill calibrates *how
+  much* ceremony, that one calibrates *when* the polish
+  is worth paying for.
+- [MultiLevelTesting](../MultiLevelTesting/SKILL.md) —
+  testing intensity is one of the main axes of
+  formality, and the pyramid is itself a stakes-tiered
+  shape.
+- [FeatureFlagsAreInfrastructure](../FeatureFlagsAreInfrastructure/SKILL.md)
+  — the canonical guardrail that lets the product layer
+  stay improvisational at much lower blast radius.
+- [BoringTechWherePossible](../BoringTechWherePossible/SKILL.md)
+  — boring foundations underneath are what make
+  improvisational product work safe in the first place.
 
 ## Sources
 

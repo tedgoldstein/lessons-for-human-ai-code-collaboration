@@ -202,6 +202,24 @@ code together so each commit is internally consistent.
 History is something the next person reads. Shape it for
 them.
 
+## See also
+
+- [CommitHygiene](../CommitHygiene/SKILL.md) — per-commit
+  discipline (staging, messages, force-push) that this
+  skill reshapes *across* a branch.
+- [SmallBatchCommitsMergedOften](../SmallBatchCommitsMergedOften/SKILL.md)
+  — small branches mean less to reshape; this skill is what
+  you do to the few commits that exist.
+- [OneChangeAtATime](../OneChangeAtATime/SKILL.md) — the
+  single-intent-per-commit rule that makes a reshaped
+  history actually useful to bisect and revert.
+- [TheBisectMindset](../TheBisectMindset/SKILL.md) — the
+  downstream payoff: a reshaped, single-intent history is
+  what makes `git bisect` land on a useful commit.
+- [PushIsPublication](../PushIsPublication/SKILL.md) — reshape
+  *before* you push; once published, the audit trail of
+  the prior shape becomes harder to alter.
+
 ## Sources
 
 The premise (clean history matters because of revert / bisect

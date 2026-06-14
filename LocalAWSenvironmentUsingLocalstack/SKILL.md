@@ -241,6 +241,25 @@ mocks can never give you.
 The endpoint is the only thing that changes between dev and
 prod. The code is the same code.
 
+## See also
+
+- [MultiLevelTesting](../MultiLevelTesting/SKILL.md) —
+  LocalStack is where the integration tier of the
+  pyramid lives for any service that touches S3, SQS,
+  DynamoDB or the like.
+- [BoringTechWherePossible](../BoringTechWherePossible/SKILL.md)
+  — LocalStack itself is the boring substrate layered
+  over the cloud surface: docker-compose, a real AWS
+  SDK, no bespoke mock to maintain.
+- [DontReinventTheWheel](../DontReinventTheWheel/SKILL.md)
+  — don't hand-roll a fake S3 when the actual API
+  shape is available locally; the mock you'd write is
+  the platform that already exists.
+- [IdempotentByDefault](../IdempotentByDefault/SKILL.md)
+  — exercising retry and replay in tests requires a
+  reset-able local environment; LocalStack is what
+  makes that loop cheap.
+
 ## Sources
 
 Recipe and motivation from Oksana Horlock's "Setting up local

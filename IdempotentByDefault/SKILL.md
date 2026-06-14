@@ -164,6 +164,26 @@ can re-enter a state machine and unwind partial progress.
 If your operation breaks when invoked twice, your system
 breaks the first time the network blinks.
 
+## See also
+
+- [MakeTheWrongThingHard](../MakeTheWrongThingHard/SKILL.md)
+  — idempotency is the encoded version of "retry is
+  safe"; the wrong thing (double-effect) becomes
+  structurally hard rather than a discipline the caller
+  has to remember.
+- [FeatureFlagsAreInfrastructure](../FeatureFlagsAreInfrastructure/SKILL.md)
+  — the rollback path a flag provides assumes the
+  underlying operations tolerate re-application;
+  without that, flipping back is its own incident.
+- [SingleSourceOfTruth](../SingleSourceOfTruth/SKILL.md)
+  — duplicate side-effects are state drift in another
+  shape; idempotency keeps a single record of truth
+  even under at-least-once delivery.
+- [TheBisectMindset](../TheBisectMindset/SKILL.md) —
+  reproducibility across retries is a precondition for
+  useful diagnosis; a non-idempotent operation makes
+  every reproduction a different system.
+
 ## Sources
 
 Distilled from general engineering practice; echoes Stripe's

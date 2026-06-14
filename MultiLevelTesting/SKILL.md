@@ -1,6 +1,6 @@
 ---
 name: multi-level-testing
-description: Build confidence with a pyramid of tests at multiple levels — many unit tests, fewer integration tests, fewer end-to-end, a small set of smoke tests. Each level brings different benefits; combining them yields high-confidence software. Tests also act as documentation, design feedback, regression guards, and the safety net that makes refactoring possible.
+description: Build confidence with a pyramid of tests — many unit, fewer integration, fewer end-to-end, a few smoke; each level brings different benefits and together they make a codebase changeable while doubling as documentation, design feedback, and a refactoring safety net. Load when deciding how to test something, when weighing whether to mock a dependency, after a bug shipped that the tests didn't catch, when CI is slow (only E2E) or untrustworthy (only mocks), or when someone proposes testing at a single level.
 version: 0.1.0
 ---
 
@@ -152,6 +152,24 @@ you write them throughout development, not in a batch at the end.
 
 A test suite isn't there to prove the code works today. It's
 there so the code can change tomorrow.
+
+## See also
+
+- [OneChangeAtATime](../OneChangeAtATime/SKILL.md) —
+  testability collapses when commits bundle changes;
+  a green pyramid against a multi-intent commit
+  doesn't tell you which intent the test covered.
+- [TheBisectMindset](../TheBisectMindset/SKILL.md) —
+  bisect only lands somewhere useful when every level
+  of test is runnable at every commit; the pyramid
+  pays its diagnostic dividend through bisect.
+- [LocalAWSenvironmentUsingLocalstack](../LocalAWSenvironmentUsingLocalstack/SKILL.md)
+  — the practical home for the AWS-integration tier
+  of the pyramid: real SDK calls, local endpoint.
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — how much testing to invest in is itself a
+  stakes-calibration decision rather than a fixed
+  ceremony.
 
 ## Sources
 

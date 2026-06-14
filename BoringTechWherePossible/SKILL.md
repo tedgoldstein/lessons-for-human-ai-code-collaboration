@@ -1,6 +1,6 @@
 ---
 name: boring-tech-where-possible
-description: At the bottom of your stack, pick mature, well-supported tools — Postgres, SQLite, Redis, Linux, established languages, established frameworks. Reserve your novelty budget for the actual problem you're solving. Every dependency you adopt costs you operational complexity for years; mature tools come with manuals, hires, war stories, and fewer surprises.
+description: At the bottom of your stack, pick mature, well-supported tools — Postgres, SQLite, Redis, Linux, established languages and frameworks — and reserve your novelty budget for the actual product. Mature tools come with manuals, hires, war stories, and bounded surprise. Load when choosing a foundational tool (database, queue, language, framework, OS), when tempted to adopt a months-old framework as a service's foundation, when someone proposes a rewrite in the language of the month, or when a production incident traces to an obscure dependency with no Stack Overflow hits.
 version: 0.1.0
 ---
 
@@ -143,6 +143,25 @@ budgeted for:
 
 The novel thing should be the thing your business *does*, not
 the foundation under it.
+
+## See also
+
+- [DontReinventTheWheel](../DontReinventTheWheel/SKILL.md) —
+  the top-of-stack counterpart; both are leverage
+  disciplines that ask which work is *yours* to do and
+  which has already been done by someone with more time
+  to do it well.
+- [PolishWhenLoadBearing](../PolishWhenLoadBearing/SKILL.md)
+  — when to invest in your foundations at all; choosing
+  mature tools defers that question by inheriting
+  someone else's polish.
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — boring foundations are precisely what lets the
+  product layer above move improvisationally without
+  the substrate moving underneath it.
+- [ReadTheSourceFirst](../ReadTheSourceFirst/SKILL.md) —
+  mature tools have readable, vetted source you can
+  actually navigate when the abstraction leaks.
 
 ## Sources
 

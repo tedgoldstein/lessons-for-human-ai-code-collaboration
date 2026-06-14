@@ -208,6 +208,21 @@ Postmortems exist to change the system. People will keep
 making mistakes; the system can stop letting one mistake
 reach production.
 
+## See also
+
+- [LogsAreAFeature](../LogsAreAFeature/SKILL.md) —
+  without logs a postmortem has no evidence to reason
+  about; the forensic record either exists at incident
+  time or doesn't.
+- [FeatureFlagsAreInfrastructure](../FeatureFlagsAreInfrastructure/SKILL.md)
+  — the rollback path most incidents need; a flag turns
+  the postmortem from "how do we recover" into "what
+  did we learn."
+- [FormalVsImprovisational](../FormalVsImprovisational/SKILL.md)
+  — postmortem depth is itself a stakes-calibration
+  question; not every minor blip warrants the full
+  ceremony.
+
 ## Sources
 
 Distilled from SRE / DevOps tradition; echoes Google's *Site

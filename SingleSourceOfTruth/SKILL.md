@@ -169,6 +169,25 @@ This is harder than (1) or (2). Choose it only when forced.
 If you can't say who owns a piece of state, nobody does —
 and that's exactly when it drifts.
 
+## See also
+
+- [TheContractIsTheArtifact](../TheContractIsTheArtifact/SKILL.md)
+  — the contract is often the SSOT in disguise; the
+  shape everyone agrees on is the record everyone
+  derives from.
+- [CausalDivergence](../CausalDivergence/SKILL.md) —
+  when a single SSOT isn't reachable, designate the
+  reconciliation point instead; divergence is fine if
+  the merge direction is named.
+- [CommonsWithDivergentClones](../CommonsWithDivergentClones/SKILL.md)
+  — one-way merge encodes which clone is downstream of
+  truth; the SSOT discipline applied to a population
+  of working copies.
+- [IdempotentByDefault](../IdempotentByDefault/SKILL.md)
+  — duplicate side-effects are SSOT violations in
+  motion; idempotency keeps one canonical record even
+  under at-least-once delivery.
+
 ## Sources
 
 Distilled from general engineering practice; echoes

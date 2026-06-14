@@ -1,6 +1,6 @@
 ---
 name: naming-is-api
-description: The names of functions, types, modules, and variables are the most-used surface of your code. They are read thousands of times for every time they're written. Favour long descriptive over short clever, specific over generic, intention-revealing over implementation-revealing. Rename freely — modern IDEs and `git mv` make it cheap.
+description: Names of functions, types, modules, and variables are the most-used surface of your code — favour long-descriptive over short-clever, specific over generic, intention-revealing over implementation-revealing; rename freely. Load when naming or renaming anything, when about to commit a function named `process` / `handle` / `data` / `result` / `helper` / `tmp`, when a comment is explaining what a variable holds, or when two names like `getUser` and `fetchUser` force a reader to open the bodies to tell them apart.
 version: 0.1.0
 ---
 
@@ -140,6 +140,22 @@ know what will happen.
 
 Names are how the next reader navigates your code. Make
 navigation easy.
+
+## See also
+
+- [GrammarIsAlsoAPI](../GrammarIsAlsoAPI/SKILL.md) — the
+  next layer up: once the identifiers are right, the
+  grammar of invocation (argument order, required vs
+  optional, builder vs flat call) is the next surface
+  the caller reads.
+- [MakeTheWrongThingHard](../MakeTheWrongThingHard/SKILL.md)
+  — names are the cheapest layer of making wrong usage
+  obviously wrong; what a name can't carry, the type
+  system or API shape has to.
+- [TheContractIsTheArtifact](../TheContractIsTheArtifact/SKILL.md)
+  — the contract's vocabulary outlives any single tool
+  that reads it; the names you pick today are what the
+  next decade's tooling will key off.
 
 ## Sources
 

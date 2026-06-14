@@ -11,6 +11,16 @@ skill to load when a recognisable situation appears. Each entry lists
 concrete triggers — phrases, symptoms, or tasks. When you see one,
 load the named skill.
 
+> **Note on the bootstrap.** The standing discipline that says
+> *check before every engineering action* lives in
+> [`UsingLessons/SKILL.md`](../UsingLessons/SKILL.md). This
+> Index is the catalog `UsingLessons` consults. Under a native
+> `.claude/skills/` install, the harness surfaces every skill's
+> description at session start and `UsingLessons` directs the
+> agent to match against those; under a cloned-reference
+> install where descriptions aren't surfaced, this Index *is*
+> what `UsingLessons` matches against.
+
 The triggers are *symptoms* you might notice or *phrases* the user
 might say, not categories of file or task. Read them as: "if any of
 these is happening, load this skill."
@@ -136,6 +146,37 @@ Triggers:
 when to use `--amend` vs interactive rebase vs new-branch-+-
 cherry-pick vs `git absorb`, and how to think about the three
 recurring debates (force-push, squash, valid-at-every-commit).
+
+### → Load `CommitHygiene`
+
+When the work involves **making a commit or a push** — the
+two everyday acts whose discipline determines whether the
+history is usable later.
+
+Triggers:
+
+- About to `git add -A` or `git commit -am "stuff"`.
+- About to commit directly to `main` because "it's just a
+  small fix."
+- A commit message would be `wip`, `fix`, `update`, `done`,
+  or `stuff`.
+- A diff includes `.env`, build artifacts, `node_modules/`,
+  IDE settings, or stray `console.log` debug output.
+- About to push without anyone (human or otherwise) having
+  seen the diff.
+- About to force-push to overwrite a prior push.
+- An AI agent is about to commit + push autonomously.
+- `git log --oneline` shows commits whose intent isn't
+  recoverable from the message.
+
+**The skill teaches:** commit is permanent; push is public.
+Stage explicitly (named paths, not sweeping flags). Write
+the message so future-you can read `git log` and learn
+something. Use a feature branch + PR rather than committing
+to `main`. Treat commit and push as two separate approvals.
+Pairs with `PushIsPublication` (cadence),
+`OneChangeAtATime` (scope per commit), and
+`OrganisingGitPullRequests` (reshaping before review).
 
 ### → Load `LocalAWSenvironmentUsingLocalstack`
 
@@ -573,6 +614,44 @@ it's a registry, vector clock, or consensus log. Carry
 content state alongside workflow state, tag every claim with
 the version it was made against, push truth onto disk
 because AI agents lack out-of-band channels.
+
+### → Load `FluidVsTricky`
+
+When the work involves **deciding build order under
+uncertainty** — whether to build GUI and foundation in
+parallel or collapse to bottom-up — or when noticing a
+mid-task regime shift.
+
+Triggers:
+
+- About to build UI on a foundation whose invariants you
+  can't yet write down.
+- "We keep redoing the same view."
+- You've thrown away the same UI flow twice.
+- The bug diagnosis just named a *class of incident* (a
+  correctness property) rather than a single missed case.
+- The layer in front of you touches concurrency, atomicity,
+  persistence, cryptography, security, or a contract other
+  actors rely on.
+- A senior reviewer would ask factual questions about the
+  layer's behavior, not design-taste questions.
+- Tempted to "ship the GUI and worry about correctness
+  later."
+- A regime shift just happened mid-task and the operator
+  says something like "finish [the foundation piece],
+  commit, push — then back to the UI."
+
+**The skill teaches:** two regimes, two strategies. Fluid
+regime → build GUI + foundation in parallel; each side
+surfaces gaps the other missed. Tricky regime → collapse
+to bottom-up; foundation first; GUI later. The expensive
+mistake is mixing them — keeping the fluid strategy when
+the regime has shifted to tricky burns iterations of UI
+that get thrown away on the next foundation move. Two
+quick tests: (a) can I write down this layer's
+invariants? Yes → fluid; no → tricky. (b) would a senior
+reviewer ask factual or taste questions? Factual →
+tricky; taste → fluid.
 
 ### → Load `ReplaceDontRefactor`
 

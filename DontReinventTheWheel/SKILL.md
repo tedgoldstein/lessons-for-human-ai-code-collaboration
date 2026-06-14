@@ -1,6 +1,6 @@
 ---
 name: dont-reinvent-the-wheel
-description: Recognize when a custom system you're building is isomorphic to a mature platform, then map onto the platform instead of rebuilding it. The residual — what the platform genuinely can't reach — is your real work; everything else is leverage.
+description: Recognize when a custom system you're building is isomorphic to a mature platform, then map onto the platform instead of rebuilding it; the residual — what the platform genuinely can't reach — is your real work. Load when about to author a parser, renderer, layout engine, query language, schema language, routing system, event bus, or dependency resolver — when a plan sketches a parallel implementation of something HTML+DOM, SQLite, POSIX, ICU, or the language's package manager already solves — or when reaching for hand-rolled auth, OAuth, or session handling.
 version: 0.1.0
 ---
 
@@ -181,3 +181,22 @@ rebuild.
 
 The mark of a senior engineer is not what they build. It's what they
 recognize they don't have to.
+
+## See also
+
+- [BoringTechWherePossible](../BoringTechWherePossible/SKILL.md)
+  — the paired substrate discipline; one says don't
+  rebuild the platform, the other says pick the platform
+  that's already been worn smooth.
+- [TheContractIsTheArtifact](../TheContractIsTheArtifact/SKILL.md)
+  — cheap, ubiquitous substrates (HTML, JSON, SQL) attract
+  participants without asking permission precisely
+  because the contract is the artifact.
+- [ReadTheSourceFirst](../ReadTheSourceFirst/SKILL.md) —
+  recognising isomorphism between your problem and a
+  mature platform requires knowing the platform's actual
+  shape, not the marketing summary.
+- [MakeTheWrongThingHard](../MakeTheWrongThingHard/SKILL.md)
+  — mature platforms have already encoded most of the
+  "wrong things" as hard; rebuilding loses that
+  accumulated friction.

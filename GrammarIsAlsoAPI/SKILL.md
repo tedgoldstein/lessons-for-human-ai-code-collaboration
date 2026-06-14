@@ -1,6 +1,6 @@
 ---
 name: grammar-is-also-api
-description: Beyond identifier names (which [NamingIsAPI](../NamingIsAPI/SKILL.md) covers), the **grammar** of commands — verb forms, phrasing, capitalization, sigils, proper-noun choices — is a UX surface. `Fix Track X` reads differently from `fix X`. Capitalizing `Track.app` vs `Track.app` carries semantic weight. In CLIs, methodologies, and conversational AI systems, the syntax of how operations are invoked matters as much as the vocabulary of what's invoked. Grammar disambiguates, invites, and signals which surface a token belongs to.
+description: Beyond identifier names (which NamingIsAPI covers), the grammar of commands — verb forms, phrasing, capitalization, sigils, proper-noun choices — is a UX surface; be permissive in input, canonical in output. Load when designing a CLI's verb table or a methodology's vocabulary, when choosing whether to prefix identifiers with a sigil (`R12345678` vs `12345678`), when a conversational AI must recognize commands embedded in natural-language messages, when your identifiers are visually identical to those in an adjacent system, or when the same operation has different phrasings across docs / UI / CLI / chat.
 version: 0.1.0
 ---
 
