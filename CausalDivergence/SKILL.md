@@ -1,6 +1,6 @@
 ---
 name: causal-divergence
-description: Modern software runs across multiple simultaneously-valid views of state — git branches, distributed replicas, concurrent sessions, concurrent threads, simulations, multiple programmers, and (the new and most frequent case) multiple AI agents. These views can disagree without either being wrong. The design pattern is *not* to force one absolute truth; it is to designate **one common central artifact where divergence is detectable** — a reconciliation point every actor reads. For local agentic work that artifact is usually a contract file (a Trackfile / Radar / workflow ticket); for federated systems it is a registry, a vector clock, a consensus log. Load this skill when spawning parallel agents, when two sessions report different facts about the same state, when a cold reviewer arrives, or when designing a system that multiple actors will read and write concurrently.
+description: Modern software runs across multiple simultaneously-valid views of state — git branches, distributed replicas, concurrent sessions, concurrent threads, simulations, multiple programmers, and (the new and most frequent case) multiple AI agents. These views can disagree without either being wrong. The design pattern is *not* to force one absolute truth; it is to designate **one common central artifact where divergence is detectable** — a reconciliation point every actor reads. For local agentic work that artifact is usually a contract file (a Trackfile / Track / workflow ticket); for federated systems it is a registry, a vector clock, a consensus log. Load this skill when spawning parallel agents, when two sessions report different facts about the same state, when a cold reviewer arrives, or when designing a system that multiple actors will read and write concurrently.
 version: 0.1.0
 ---
 
@@ -38,7 +38,7 @@ it can't, divergence is silent and a human has to be the detective.
 - You're about to spawn a second AI agent (parallel Claude Code
   session, scheduled cloud routine, headless verifier) against a
   shared repo or shared state store.
-- Two sessions report different facts about the same Radar, ticket,
+- Two sessions report different facts about the same Track, ticket,
   record, or file.
 - You're about to claim work is "done" or "fixed" but the change
   exists only on a branch / replica / worktree that not every consumer
@@ -74,12 +74,12 @@ Three implementations, sized to the system:
 
 | System scope | Reconciliation point | What it carries |
 |---|---|---|
-| **Local file-based methodology** (Track / Radar, Apple Radar, Jira-like tickets, design docs) | The ticket / Trackfile / spec markdown file | Content-state fields: which commit(s) implement the work, which trunks have absorbed them, which SHA each verdict was cast against. See the Trackfile `## Commit` / `## Integration state` example in [worked example](#worked-example) below. |
+| **Local file-based methodology** (Track / Track, Apple Track, Jira-like tickets, design docs) | The ticket / Trackfile / spec markdown file | Content-state fields: which commit(s) implement the work, which trunks have absorbed them, which SHA each verdict was cast against. See the Trackfile `## Commit` / `## Integration state` example in [worked example](#worked-example) below. |
 | **Git itself** (multi-branch, multi-worktree development) | The commit DAG | Parent SHAs, branch refs, merge commits. Always present; consult it. `git log --all --grep <id>` is the cold-reader recovery move. |
 | **Distributed system** (replicas, federated services, multi-region) | A registry, vector clock, version vector, consensus log, CRDT metadata | "What does each replica know about each other replica's state, and as of when?" |
 
 The **right reconciliation point is whatever every actor naturally
-reads anyway**. A Radar markdown is the right place because every
+reads anyway**. A Track markdown is the right place because every
 consumer (Claude session, Verify Agent, dashboard, human) opens that
 file. A side-channel JSON index is the wrong place because consumers
 don't naturally consult it; they would have to be told to. The
@@ -176,7 +176,7 @@ reconciliation point should be on the path of least resistance.
 
 - **Document the divergence-detection move for cold readers.** The
   recovery move from a silent-divergence state should be in the
-  contract. For Radar that's "if `## Commit` is empty or stale, run
+  contract. For Track that's "if `## Commit` is empty or stale, run
   `git log --all --grep <id>` and `git branch --contains <sha>` before
   re-implementing." Cold readers should have a one-line escape hatch
   back to the truth.
@@ -255,8 +255,8 @@ synchronize. That is the modern default; it isn't every system.
 ## Worked example
 
 > The example below describes events from May 2026 in the project
-> then called *Radar* and since renamed *Track* (Trackfile / Tracks/
-> / Tracker.app — see [tedgoldstein/radar](https://github.com/tedgoldstein/radar)
+> then called *Track* and since renamed *Track* (Trackfile / Tracks/
+> / Tracker.app — see [tedgoldstein/Track](https://github.com/tedgoldstein/Track)
 > master Trackfile `7j4aw332` for the rename rationale). The paths
 > in the narrative reflect the post-rename layout (`Tracks/<id>.md`,
 > `claude/track/<id>`); the events themselves predated those names.
@@ -265,14 +265,14 @@ A user is driving the Track methodology — a markdown-file-per-ticket
 system — with two concurrent Claude sessions. Session A is on a laptop
 in a git worktree at `.claude/worktrees/claude+track+1tbhk4x6`, on
 branch `claude/track/1tbhk4x6`. It has just committed a fix for the
-bug (commit SHA `6cc0ab6`). The main tree at `/Users/.../Code/radar`
+bug (commit SHA `6cc0ab6`). The main tree at `/Users/.../Code/Track`
 is on branch `plugin-experiment`, which does not yet carry the fix.
 
 The user, intending to verify the fix, opens a second Claude session
 from the main tree's directory. They ask "is this bug fixed?" The
 second session:
 
-1. Reads `consumers/radar.html/radar-detail.jsx` in its checkout. It
+1. Reads `consumers/Track.html/Track-detail.jsx` in its checkout. It
    sees the un-patched code — the conditional rendering that destroys
    xterm.js scrollback on subtab switch. Source says "not fixed."
 2. Reads `Tracks/1tbhk4x6.md` in its checkout. It sees `Status: open`,
@@ -315,7 +315,7 @@ re-implementation of a fix that already exists.
 
 **Generalization.** The same shape applies anywhere actors operate on
 shared state asynchronously. The reconciliation point is whatever
-artifact the actors naturally read. For Radar it is the markdown
+artifact the actors naturally read. For Track it is the markdown
 file. For a federated database it is the version vector. For a
 distributed log it is the offset map. The mechanism varies; the
 principle is constant: **one place where divergence is detectable,
@@ -373,7 +373,7 @@ resembles a managed system with many simultaneously-valid views; the
 synchronization, provenance, conflict resolution, consensus, and safe
 isolation of alternate timelines rather than enforcement of a single
 absolute reality.* Surfaced live during a 2026-05-17 working session
-on the Radar methodology, when two concurrent Claude Code sessions on
+on the Track methodology, when two concurrent Claude Code sessions on
 the same repo reached opposite conclusions about whether a bug was
 fixed — neither wrong, both reading valid but different points in
 causal history.

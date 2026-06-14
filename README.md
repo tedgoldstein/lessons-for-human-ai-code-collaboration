@@ -67,6 +67,7 @@ the current situation needs.
 | [AskExactlyWhenAmbiguous](AskExactlyWhenAmbiguous/SKILL.md) | Under autonomous scope ("work largely unsupervised"), default proceed for reversible local decisions; pause for hard-to-reverse, externally-visible, or under-specified ones. Over-confirming is friction; silent deciding the wrong thing is worse. |
 | [SymptomsRevealRootCauses](SymptomsRevealRootCauses/SKILL.md) | A small symptom (an unexpected prompt, a flaky test, a one-off error) is usually a window into a deeper architectural or environmental cause. Trace upstream — surface → behaviour → mechanism → architecture → assumption — until you find structure. Fresh-clone / fresh-env is a cheap probe for distinguishing drift from architecture. |
 | [Sharpen](Sharpen/SKILL.md) | Mid-session reflective pass on the skill library itself. Score the skills that fired this session, sharpen the dull ones in place (tighter triggers, missing failure modes), and scaffold new skills for recurring gaps. The session is perishable evidence — spend it on the library. |
+| [ValidateCodexSecurityWithMythOS](ValidateCodexSecurityWithMythOS/SKILL.md) | Codex is still immature on security-context reasoning. For auth, credentials, sandboxing, network access, and permission boundaries, validate Codex conclusions with Claude MythOS until it gets better. |
 
 ## Why human-AI specifically
 

@@ -173,7 +173,7 @@ not before."
 
 ## Worked example
 
-The Radar.app macOS app was built across three design
+The Track.app macOS app was built across three design
 waves over a few weeks. At no point in those weeks did
 it have:
 
@@ -187,29 +187,29 @@ It built fine via `xcodebuild → DerivedData` and ran on
 the developer's laptop. That was adequate. *No second
 user existed.*
 
-The polished-distribution work was filed as Radar
+The polished-distribution work was filed as Track
 `vr9xsmxk` with full acceptance criteria — Apple Developer
 Team setup, entitlements audit, hardened runtime,
 notarization pipeline, DMG packaging, Sparkle — but
-deliberately deferred. The Radar's own Internal notes
+deliberately deferred. The Track's own Internal notes
 state the priority bluntly: *"Priority: not urgent. The
 xcodebuild → DerivedData workflow is adequate for the
-people building Radar itself (i.e. one developer). This
+people building Track itself (i.e. one developer). This
 becomes urgent the moment a second person wants to use
-radar.app without compiling it."*
+Track.app without compiling it."*
 
 Same project, several other examples:
-- The Medbook `RADAR_DEPLOYS` KV namespace uses bare
-  Radar ids (no `R` prefix). The R-prefix migration is
+- The Medbook `TRACK_DEPLOYS` KV namespace uses bare
+  Track ids (no `R` prefix). The R-prefix migration is
   proposed; the KV migration is deliberately scoped
   *out* for v1.0, because nothing currently depends on
   the keys being prefixed.
 - The `examples/medbook/README.md` was outdated
-  (described `radar init` as "planned" when it had
+  (described `Track init` as "planned" when it had
   shipped). The fix took two minutes; it landed when
   someone noticed the doc was stale, not when convention
   said "documentation must be in sync."
-- The `Radar/vr9xsmxk.md` workaround section names an
+- The `Track/vr9xsmxk.md` workaround section names an
   unsigned-DMG path as a *preferred interim* — explicitly
   okay with the Gatekeeper "right-click → Open" first-
   launch ceremony because that's adequate for early
@@ -245,7 +245,7 @@ product / the design that's actually moving forward.
 
 ## Sources
 
-Inferred from observing the Radar repo's deliberate
+Inferred from observing the Track repo's deliberate
 non-polish of distribution infrastructure (vr9xsmxk,
 2026-05) while the methodology contract evolved through
 three waves. The pattern is older — it's the same

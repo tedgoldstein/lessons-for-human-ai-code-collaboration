@@ -40,8 +40,8 @@ canonical state is markdown in git is bootstrap-by-hand-able.
   against the contract.
 - The first user of a new methodology / format / system has no
   prior tools to use.
-- A meta-Radar / meta-bug needs to be filed about the tool that
-  files Radars / bugs.
+- A meta-Track / meta-bug needs to be filed about the tool that
+  files Tracks / bugs.
 
 ## The shape
 
@@ -149,32 +149,32 @@ underneath; the GUI is a renderer of that contract.
 
 ## Worked example
 
-Radar.app (the macOS bug-tracking app for the Radar
-methodology) wasn't yet packaged for distribution. A Radar
-needed to be filed *to track* the work of making Radar.app
+Track.app (the macOS bug-tracking app for the Track
+methodology) wasn't yet packaged for distribution. A Track
+needed to be filed *to track* the work of making Track.app
 packageable. The chicken couldn't lay the egg.
 
-The bootstrap-by-hand path: the Radar methodology's contract
-is `Radar/<id>.md` — plain markdown in git. The CLI's
-`radar new` verb mints an id and writes a skeleton file.
+The bootstrap-by-hand path: the Track methodology's contract
+is `Track/<id>.md` — plain markdown in git. The CLI's
+`Track new` verb mints an id and writes a skeleton file.
 The user filled in the substantive sections (Problem,
 Proposed Resolution, Acceptance criteria, Files likely
 affected, Verify required) by editing the markdown
-directly. The CLI's `radar status` verb confirmed the file
-parsed cleanly. The radar.html dashboard rendered the new
-Radar via the JSON index built by `build-radar-index.js`.
+directly. The CLI's `Track status` verb confirmed the file
+parsed cleanly. The Track.html dashboard rendered the new
+Track via the JSON index built by `build-Track-index.js`.
 
-The polished Radar.app GUI played no role. It couldn't —
-it's the thing being fixed. The Radar moved through
+The polished Track.app GUI played no role. It couldn't —
+it's the thing being fixed. The Track moved through
 Analyze (status `open` → `analyze` → `integrate`), with
 every transition done by edit-and-commit on the markdown
-file. Two more Radars (about the same set of methodology
+file. Two more Tracks (about the same set of methodology
 improvements) were filed the same way, in the same
 session, while the laptop session and the user were both
 actively working without any "wait until the app is
 ready" pause.
 
-The whole episode — file the Radar, fill it out, transition
+The whole episode — file the Track, fill it out, transition
 its status, cross-reference siblings — was bootstrap-by-
 hand from start to finish. The cost: about ten minutes of
 manual file edits. The benefit: no deadlock, no pause, no
@@ -206,10 +206,10 @@ single point of failure.
 
 ## Sources
 
-Inferred from observing the Radar methodology bootstrap
-(2026-05): filing Radar vr9xsmxk about Radar.app's
+Inferred from observing the Track methodology bootstrap
+(2026-05): filing Track vr9xsmxk about Track.app's
 distribution gap, from the CLI + text editor, because
-Radar.app couldn't yet host the workflow that would fix
+Track.app couldn't yet host the workflow that would fix
 it. The general principle is older — it's the same
 instinct behind plain-text Unix config files, the
 Internet's text-protocol culture (HTTP, SMTP all readable

@@ -157,13 +157,13 @@ is the more expensive choice.
 
 ## Worked example
 
-The Radar repo went through three waves in three weeks
+The Track repo went through three waves in three weeks
 (2026-04 → 2026-05):
 
 - **Wave1**: a JavaScript CLI + an HTML dashboard built
   against a sample-data file. Proof of concept.
 - **Wave2**: a full native SwiftUI macOS app — BrandRow,
-  TabStripView, DashboardView in four modes, RadarDetailView
+  TabStripView, DashboardView in four modes, TrackDetailView
   with stage-timeline spine, etc. Thousands of lines of
   view code, four full design audits, pixel-faithful to a
   design handoff.
@@ -220,8 +220,8 @@ and shapeless.
 
 ## Sources
 
-Inferred from observing the Radar repo's three-wave
-arc (radar/, 2026-04 → 2026-05). The pattern is older:
+Inferred from observing the Track repo's three-wave
+arc (Track/, 2026-04 → 2026-05). The pattern is older:
 Joel Spolsky's *"Things You Should Never Do, Part 1"*
 warns against rewrites; Martin Fowler's strangler-fig
 pattern is the *gradual* alternative; this skill names

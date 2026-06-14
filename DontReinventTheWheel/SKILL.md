@@ -85,37 +85,37 @@ work and let the substrate carry the weight.
    always the interesting part — the part where your domain expertise
    actually lives.
 
-## Worked example: Radar's wave3 pivot
+## Worked example: Track's wave3 pivot
 
-The radar project (`~/Code/radar`) hit this pattern in its second wave.
+The Track project (`~/Code/Track`) hit this pattern in its second wave.
 
 **The custom thing being built (wave2)** was a native SwiftUI surface for
 an operator dashboard: BrandRow, TabStripView, DashboardView with four
-view modes (Table / Pipeline / Lanes / Stream), RadarDetailView with a
-stage-timeline spine, NewRadarView with live preview, LadybugFAB,
+view modes (Table / Pipeline / Lanes / Stream), TrackDetailView with a
+stage-timeline spine, NewTrackView with live preview, LadybugFAB,
 DesignTokens, custom Toaster, custom MarkdownText, custom verb buttons,
 custom search, custom filter chips. Several thousand lines of SwiftUI.
 Four full design-audit passes against a Claude Design handoff to chase
 pixel-faithful parity.
 
-**The recognition moment:** the problem was *parse a structured Radar
+**The recognition moment:** the problem was *parse a structured Track
 markdown document; render a rich graphical UI with selection, focus,
 keyboard shortcuts, copy-paste, accessibility, find-in-page, navigation
 history, and styling*. **HTML + CSS + DOM has been solving this since
-1993.** The team already had `consumers/radar.html/` — a JSX dashboard
+1993.** The team already had `consumers/Track.html/` — a JSX dashboard
 that did the rendering side. Building a parallel SwiftUI stack was
 literally re-solving a solved problem.
 
 **The pivot.** The Swift host shrank to a WKWebView shell + a JS↔Swift
-bridge. radar.html became the entire visual surface. The wave2 SwiftUI
+bridge. Track.html became the entire visual surface. The wave2 SwiftUI
 tree got deleted (recoverable from a `HTMLJUNTA` tag).
 
 **The residual** — the things HTML+browser genuinely couldn't do, and
 where Swift kept earning its keep:
 
-- **Subprocess** — PTY-backed Claude Code sessions per Radar (browsers
+- **Subprocess** — PTY-backed Claude Code sessions per Track (browsers
   can't fork or attach to TTYs).
-- **Filesystem write** — atomic mutation of `Radar/<id>.md` files
+- **Filesystem write** — atomic mutation of `Track/<id>.md` files
   outside the user-data sandbox.
 - **AI** — long-lived Anthropic threads, API keys, the DSD pipeline.
 - **OS chrome** — native menus, global shortcuts (⌘F find, ⌥⌘C

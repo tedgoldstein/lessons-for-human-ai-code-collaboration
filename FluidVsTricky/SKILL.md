@@ -136,5 +136,5 @@ Cheaper to pause UI work as soon as the regime shift is detected.
 
 - `causal-divergence` — names the structural property that often
   causes regime shifts (multiple-actors discovering they disagree).
-- `acid-in-tracker` (radar repo) — a worked-example skill where
+- `acid-in-tracker` (Track repo) — a worked-example skill where
   the regime shifted on 2026-05-18 and the right call was made.

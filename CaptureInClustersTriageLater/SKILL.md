@@ -90,7 +90,7 @@ formal filing cabinet — formal filing happens during triage.
 
 ## Practical guidance
 
-- **Make capture a single command.** `radar new "<title>"`.
+- **Make capture a single command.** `Track new "<title>"`.
   `gh issue create -t "<title>"`. `echo "<idea>" >> TODO.md`.
   If filing requires more than one verb + a title, it's
   too heavy for clustered capture.
@@ -112,8 +112,8 @@ formal filing cabinet — formal filing happens during triage.
   happen.
 
 - **Cross-link during triage, not during capture.**
-  Capture writes one Radar at a time; triage notices
-  "this is related to that other Radar" and adds
+  Capture writes one Track at a time; triage notices
+  "this is related to that other Track" and adds
   `## Reference` entries. Capture-time cross-linking
   is overhead; triage-time cross-linking is signal.
 
@@ -183,44 +183,44 @@ formal filing cabinet — formal filing happens during triage.
 
 ## Worked example
 
-During a session refining the Radar methodology, the user
-sent three rapid "Add in:" messages while a single Radar
+During a session refining the Track methodology, the user
+sent three rapid "Add in:" messages while a single Track
 was being filled out:
 
-1. *"Add in: radar.app should be Radar.app"* (a casing
-   convention change, mid-Radar)
-2. *"Add in: Radar identifigers should begin with the
+1. *"Add in: Track.app should be Track.app"* (a casing
+   convention change, mid-Track)
+2. *"Add in: Track identifigers should begin with the
    letter R as in R12345678"* (a contract-format change,
    minutes later)
-3. *"Add in, there should be a search feature the Radar.app
-   that finds all Radar names mentioned in a block of
+3. *"Add in, there should be a search feature the Track.app
+   that finds all Track names mentioned in a block of
    text..."* (a feature request, minutes after that)
 
 The naive response would have been to debate where each
 belonged before filing. Instead: capture each, fast.
 
 - Item 1 went as a small acceptance criterion (`§0`) on the
-  in-flight Radar `vr9xsmxk` (the radar.app distribution
-  Radar), because casing is naturally bundled with
+  in-flight Track `vr9xsmxk` (the Track.app distribution
+  Track), because casing is naturally bundled with
   distribution.
-- Item 2 was filed as its own new Radar `qa6stpkt` (R-prefix
+- Item 2 was filed as its own new Track `qa6stpkt` (R-prefix
   ids), with full Proposed Resolution + Acceptance criteria
   filled in.
-- Item 3 was filed as a third Radar `ykjnb789`
+- Item 3 was filed as a third Track `ykjnb789`
   (paste-and-search), with an explicit dependency on
   `qa6stpkt` recorded in Internal notes.
 
 All three landed in commits within twenty minutes. Triage
 happened *during the filling-out*, not before the filing.
 The most valuable observation about the cluster — that
-filing the R-prefix Radar itself demonstrates *why* the
+filing the R-prefix Track itself demonstrates *why* the
 R-prefix matters — emerged at triage, not at capture. None
 of the items were lost. The total capture friction was
-roughly one `radar new` per item.
+roughly one `Track new` per item.
 
 The methodology behaved as a scratchpad: rapid filing, then
 refinement. The result is a backlog with three real,
-detailed Radars instead of three forgotten conversational
+detailed Tracks instead of three forgotten conversational
 asides.
 
 ## Tagline
@@ -248,7 +248,7 @@ your methodology is the bottleneck, not the team.
 ## Sources
 
 Inferred from observing rapid-fire idea capture during a
-Radar methodology design session (2026-05). The principle
+Track methodology design session (2026-05). The principle
 is older — it's the GTD ("Getting Things Done")
 distinction between *capture* and *processing*, and it
 echoes "inbox zero" patterns in personal productivity.

@@ -164,7 +164,7 @@ its work visible. Both compatible.
   forward); the AI hits an error condition it doesn't
   understand and starts trying to "fix" the conflict.
   Better: one push per logical unit, coordinated
-  through some shared signal (a task tracker, a Radar,
+  through some shared signal (a task tracker, a Track,
   a `pending-push` file).
 - **CI as a guardrail substitute.** "If I push and CI
   fails, I'll fix it." This makes CI the review surface
@@ -213,14 +213,14 @@ its work visible. Both compatible.
 
 ## Worked example
 
-In a session working across three repos (radar/,
+In a session working across three repos (Track/,
 medbook.org, labbook.ai), an AI generated 12 commits
 over several hours:
 
-- 8 on radar/ (cleanup commits, new Radar filings,
+- 8 on Track/ (cleanup commits, new Track filings,
   acceptance-criteria adds)
 - 3 on medbook.org (skill refresh, Execution → Running
-  rename, new Radars + routine artifact)
+  rename, new Tracks + routine artifact)
 - 1 on labbook.ai (bootstrap commit)
 
 None were pushed. The user's memory note was explicit:
@@ -241,7 +241,7 @@ origin and what downstream effects (CI runs, mirror
 syncs, deploy hooks) will fire from it.
 
 Counter-example from the same period: in Medbook, an
-earlier session had committed three Radar status updates
+earlier session had committed three Track status updates
 but not pushed. When a second session walked into the
 repo, those uncommitted modifications were visible
 (modified-not-staged), and the second session had to

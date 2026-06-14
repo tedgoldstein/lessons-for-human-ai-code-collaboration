@@ -51,7 +51,7 @@ know what will happen.
 ## Why it matters
 
 1. **Fewer comments are needed.** A function named
-   `markRadarAsClosedWithResolution(id, text)` doesn't need a
+   `markTrackAsClosedWithResolution(id, text)` doesn't need a
    docstring repeating the signature in prose.
 
 2. **Onboarding accelerates.** Reading a well-named codebase is
@@ -68,7 +68,7 @@ know what will happen.
    confusion.
 
 5. **Future-search works.** Want to know everywhere we close a
-   Radar? `grep "closeRadar"`. If the name is `process` or
+   Track? `grep "closeTrack"`. If the name is `process` or
    `handle` you can't grep anything useful.
 
 ## Practical guidance

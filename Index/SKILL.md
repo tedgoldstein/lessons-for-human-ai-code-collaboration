@@ -17,6 +17,30 @@ these is happening, load this skill."
 
 ## Routing table
 
+### → Load `ValidateCodexSecurityWithMythOS`
+
+When the work involves **Codex making security-sensitive claims about
+auth, credentials, sandboxing, network access, escalation, keyrings,
+permission boundaries, or host-vs-sandbox execution**.
+
+Triggers:
+
+- Codex says a user is logged in, logged out, unauthorized, or has an
+  invalid token.
+- Codex reasons about sandboxed vs host execution, network permissions,
+  credential stores, keyrings, SSH agents, or escalation.
+- Codex runs a command in one context, then verifies it in another.
+- Codex repeats a security-context mistake after the user points it out.
+- The user asks "why would you expect that to work?" about auth,
+  sandboxing, network access, or permissions.
+- A sandboxed `gh auth status` or similar command is used to reason
+  about a host-side login flow.
+
+**The skill teaches:** Codex is still immature on security-context
+reasoning. For security-sensitive conclusions, have Codex state the
+exact boundary it is observing, then validate the security model with
+Claude MythOS until Codex gets better.
+
 ### → Load `DontReinventTheWheel`
 
 When the work involves **building a custom system that mature
@@ -520,7 +544,7 @@ Triggers:
 - About to spawn a second AI agent (parallel session, cloud
   routine, headless verifier) against a shared repo.
 - Two sessions report different facts about the same ticket,
-  Radar, record, or file.
+  Track, record, or file.
 - About to claim work is "fixed" or "done" while the change
   lives only on a branch / worktree / replica that not every
   consumer can see.
@@ -544,7 +568,7 @@ the common case rather than the edge case. The design
 pattern is one *common central artifact where divergence is
 detectable* — a reconciliation point every actor reads.
 For local methodologies the artifact is usually a contract
-file (a Radar markdown, a ticket); for distributed systems
+file (a Track markdown, a ticket); for distributed systems
 it's a registry, vector clock, or consensus log. Carry
 content state alongside workflow state, tag every claim with
 the version it was made against, push truth onto disk
@@ -696,8 +720,8 @@ Triggers:
   vocabulary.
 - Choosing whether to prefix identifiers with a sigil
   (`R12345678` vs `12345678`).
-- Capitalization decisions for product names (`radar.app`
-  vs `Radar.app`).
+- Capitalization decisions for product names (`Track.app`
+  vs `Track.app`).
 - A conversational AI needs to recognize commands embedded
   in natural-language messages.
 - Identifiers in your system are visually identical to
@@ -743,6 +767,74 @@ options A/B/C, I lean A because X, what's your call?")
 rather than open-ended. Over-confirming is friction;
 silent deciding the wrong thing is worse. The skill is
 reading which moment is which.
+
+### → Load `SymptomsRevealRootCauses`
+
+When the work involves **a small visible symptom that probably hides
+a deeper architectural or environmental cause** — or you're tempted
+to suppress, retry, or work-around an issue without investigating
+its origin.
+
+Triggers:
+
+- A user reports something specific (a prompt, an error, a missing
+  button) and your first thought is "I'll just suppress that."
+- About to add a retry, a timeout bump, a special-case conditional,
+  or a "just restart it" cron for a "transient" issue.
+- A "tiny" bug keeps coming back, or each fix migrates the symptom
+  to a nearby place.
+- Two or more targeted fixes have already failed.
+- A fresh clone / fresh environment / fresh database "magically"
+  makes the problem go away without you understanding why.
+- Something is "weirdly hard" (UI hard to test, deploys harder than
+  they should be, onboarding rough) and the convention is to work
+  around it.
+- A cluster of `// HACK:` or `// TODO: revisit` comments in one
+  area.
+- Two unrelated symptoms turn out to share a fix — a sign the cause
+  is structural and probably has more surface area you haven't seen
+  yet.
+
+**The skill teaches:** a symptom is what crossed the attention
+threshold; the cause is usually two or three layers upstream
+(surface → behaviour → mechanism → architecture → assumption).
+Trace upstream until you find structure. Use fresh-clone / fresh-env
+as a cheap probe to distinguish drift-caused symptoms from
+architecture-caused ones. Two failed fixes ⇒ stop fixing, start
+investigating. Verify hypotheses cheaply before committing to a
+redesign.
+
+### → Load `Sharpen`
+
+When the **skill library itself** is the artifact to update —
+mid-session, after enough work has happened to know which
+skills helped and which were dull.
+
+Triggers:
+
+- The user says `/sharpen`, "sharpen this session," "what
+  did we learn about our skills today," or asks for a
+  library pass.
+- A skill loaded but its description didn't actually
+  describe when it should fire.
+- A skill fired *late* — its triggers missed the symptom
+  you saw, and you only realised partway through.
+- You did something three times this session with no skill
+  covering it — that's a gap, not a one-off.
+- A skill's body was vague exactly where you hit the edge
+  case.
+- You disagreed with a skill's prescription and overrode
+  it — the skill's scope or guidance needs revisiting.
+- The session is about to compact or end, and the friction
+  evidence will evaporate with it.
+
+**The skill teaches:** enumerate the skills loaded this
+session, score each as sharp / dull / mis-aimed / gap-
+pointing, edit the dull ones in place (tighter triggers,
+missing failure modes) anywhere on disk you can reach,
+scaffold draft skills for recurring gaps, and report a diff
+summary so the user can review. Auto-applies edits.
+Worth doing imperfectly; the alternative is forgetting.
 
 ## How to use this index
 

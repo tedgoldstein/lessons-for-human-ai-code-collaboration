@@ -248,7 +248,7 @@ exactly 4 times:
 
 Between those four pauses, the AI made hundreds of
 decisions autonomously: which Verify criteria to mark N/A
-on which Radars, how to phrase acceptance criteria, what
+on which Tracks, how to phrase acceptance criteria, what
 to put in commit messages, how to name files, when to
 rebuild the index, whether to use sed vs Edit for the
 rename, how to structure the routine artifact. None of
@@ -257,7 +257,7 @@ appropriate to the delegated scope.
 
 The four pause moments shared a pattern: each was a
 decision that was hard-to-reverse (the field-name rename
-would touch 11 Radars), affected shared/external state
+would touch 11 Tracks), affected shared/external state
 (the cloud routine), or required information the AI
 didn't have (the user's preference between three valid
 options). Each pause was structured ("here are options;

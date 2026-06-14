@@ -1,6 +1,6 @@
 ---
 name: grammar-is-also-api
-description: Beyond identifier names (which [NamingIsAPI](../NamingIsAPI/SKILL.md) covers), the **grammar** of commands — verb forms, phrasing, capitalization, sigils, proper-noun choices — is a UX surface. `Fix Radar X` reads differently from `fix X`. Capitalizing `Radar.app` vs `radar.app` carries semantic weight. In CLIs, methodologies, and conversational AI systems, the syntax of how operations are invoked matters as much as the vocabulary of what's invoked. Grammar disambiguates, invites, and signals which surface a token belongs to.
+description: Beyond identifier names (which [NamingIsAPI](../NamingIsAPI/SKILL.md) covers), the **grammar** of commands — verb forms, phrasing, capitalization, sigils, proper-noun choices — is a UX surface. `Fix Track X` reads differently from `fix X`. Capitalizing `Track.app` vs `Track.app` carries semantic weight. In CLIs, methodologies, and conversational AI systems, the syntax of how operations are invoked matters as much as the vocabulary of what's invoked. Grammar disambiguates, invites, and signals which surface a token belongs to.
 version: 0.1.0
 ---
 
@@ -37,8 +37,8 @@ appears in any text.
 - Designing a methodology / framework / DSL's invocation syntax.
 - Choosing whether to prefix identifiers with a sigil (`R12345678`
   vs `12345678`, `#123` vs `123`, `@user` vs `user`).
-- Capitalization decisions for product names (`radar.app` vs
-  `Radar.app`).
+- Capitalization decisions for product names (`Track.app` vs
+  `Track.app`).
 - A conversational AI needs to recognize commands embedded in
   natural-language messages.
 - An identifier in your system is visually identical to identifiers
@@ -73,31 +73,31 @@ appears in any text.
    feasible.
 
 3. **Grammar signals which surface a token belongs to.** `fix
-   X` could be a thousand things. `Fix Radar X` belongs
+   X` could be a thousand things. `Fix Track X` belongs
    unambiguously to one methodology. `@person fix issue #123`
    wires together GitHub conventions; if you're not using
    GitHub conventions, your grammar should be just as legible.
 
 4. **Casing carries semantic weight.** A product name capitalized
    matches how it reads in marketing copy and how users
-   reference it in conversation. An app called `radar.app` reads
-   as "the radar dot app file"; `Radar.app` reads as "the Radar
+   reference it in conversation. An app called `Track.app` reads
+   as "the Track dot app file"; `Track.app` reads as "the Track
    application." For the maintainer, the casing is just
    convention; for the user, it's invitation.
 
 5. **Parallel construction is mnemonic.** When every verb has
-   the same shape — `Verb Radar <id>`, or `Verb #<id>`, or
+   the same shape — `Verb Track <id>`, or `Verb #<id>`, or
    `@person Verb #<id>` — learning one verb teaches the
    grammar of all of them.
 
 ## Practical guidance
 
 - **Pick a single sigil and apply it ruthlessly to your
-  identifiers.** `R` for Radar ids. `#` for issue numbers.
+  identifiers.** `R` for Track ids. `#` for issue numbers.
   `@` for users. `:` for labels (`bug:high-priority`). The
   choice doesn't matter as much as the consistency.
 - **Document the canonical form once.** A SKILL.md, schema,
-  or README that says "Radar ids look like `R<8-char-body>`"
+  or README that says "Track ids look like `R<8-char-body>`"
   and is unambiguous. Every consumer reads the spec; every
   consumer agrees.
 - **Be permissive in input, canonical in output.** Accept
@@ -106,12 +106,12 @@ appears in any text.
   writes. (Postel's law: "be conservative in what you send,
   liberal in what you accept.")
 - **Match the casing of product names in code, docs, and
-  prose.** `Radar.app` in the README, `Radar.app` in the
-  Xcode `PRODUCT_NAME`, `Radar.app` in commit messages. Lower-
-  cased tracked-directory paths (`swift/radar/`) are fine —
+  prose.** `Track.app` in the README, `Track.app` in the
+  Xcode `PRODUCT_NAME`, `Track.app` in commit messages. Lower-
+  cased tracked-directory paths (`swift/Track/`) are fine —
   those are file paths, not product names.
 - **Make grammar visible in the docs.** A verb table is
-  worth printing. `Verb Radar <id>` showing the canonical
+  worth printing. `Verb Track <id>` showing the canonical
   form, with bare-form `Verb <id>` noted as an accepted
   synonym, lets new contributors learn the shape quickly.
 - **Test the grammar with a regex.** If your canonical
@@ -126,8 +126,8 @@ appears in any text.
   uses `user-` prefix; you've added a sigil that doesn't
   disambiguate.
 - **Inconsistent casing across surfaces.** The README says
-  `Radar.app`; the Xcode bundle name is `radar.app`; the
-  menu bar shows `Radar`; the docs alternate. New readers
+  `Track.app`; the Xcode bundle name is `Track.app`; the
+  menu bar shows `Track`; the docs alternate. New readers
   can't tell which is "right."
 - **Verb table with five different shapes.** `fix <id>`,
   `status [<id>|all]`, `verify <id> <crit> <verdict>`,
@@ -145,7 +145,7 @@ appears in any text.
   casing?" Users care. AI agents care (the regex is
   load-bearing). Future-you cares when reading a commit
   message from 2026 and wondering whether it referred to a
-  Radar or a Cloudflare KV key. Grammar disambiguates.
+  Track or a Cloudflare KV key. Grammar disambiguates.
 - **Inventing grammar in isolation.** If you're building a
   CLI in an ecosystem that already has conventions (`git`,
   `kubectl`, `gh`), borrow them. `verb noun [flags]` is the
@@ -169,35 +169,35 @@ appears in any text.
 
 ## Worked example
 
-The Radar methodology started with bare 8-character ids:
+The Track methodology started with bare 8-character ids:
 `vr9xsmxk`, `qa6stpkt`, `0d9z30d9`. They were collision-
 resistant and short, but visually indistinguishable from
 KV keys, commit SHA prefixes, and other 8-char tokens that
-appeared anywhere in the codebase. When a Radar's Internal
+appeared anywhere in the codebase. When a Track's Internal
 notes referenced `y1bd5y1b`, a reader had to know from
-context that it was a Radar id.
+context that it was a Track id.
 
 During a design session, the user observed that an
 email-like message — *"Look at R12345678, R7654210"* —
-could trigger a paste-and-search feature in Radar.app
-that pulled up exactly those Radars. The `R` prefix was
+could trigger a paste-and-search feature in Track.app
+that pulled up exactly those Tracks. The `R` prefix was
 the key: a tight regex `R[0-9a-hjkmnp-tv-z]{8}` matched
-Radar ids and only Radar ids, with no false positives.
+Track ids and only Track ids, with no false positives.
 The same regex on bare-form ids would have matched commit
 SHA prefixes, KV keys, and arbitrary 8-char hashes.
 
-The user filed Radar `qa6stpkt` proposing the change: new
+The user filed Track `qa6stpkt` proposing the change: new
 canonical id form `R<8-char-body>`, parser accepts both
 forms but normalizes to prefixed, migration done via a
-new `radar migrate-ids` CLI verb. Then immediately filed
-a sibling Radar `ykjnb789` for the paste-and-search
-feature that the prefix enables. The two Radars together
+new `Track migrate-ids` CLI verb. Then immediately filed
+a sibling Track `ykjnb789` for the paste-and-search
+feature that the prefix enables. The two Tracks together
 make the case for grammar-as-API: the sigil isn't
 cosmetic, it's what makes a real workflow possible.
 
 A parallel grammar fix landed in the same session:
-`radar.app` (the bundle name) was renamed `Radar.app`
-(proper-noun casing). The repo path `swift/radar/` stayed
+`Track.app` (the bundle name) was renamed `Track.app`
+(proper-noun casing). The repo path `swift/Track/` stayed
 lowercase — that's a directory, not a product name. The
 discipline: casing matches the noun's role.
 
@@ -226,10 +226,10 @@ lets readers find your system's tokens in the noise.
 
 ## Sources
 
-Inferred from observing the Radar methodology's
+Inferred from observing the Track methodology's
 mid-design grammar refinements (2026-05): the
-`radar.app → Radar.app` casing change, the
-`<id> → R<id>` sigil migration, the `fix Radar <id>`
+`Track.app → Track.app` casing change, the
+`<id> → R<id>` sigil migration, the `fix Track <id>`
 verb-form proposal. The general principle is older —
 linguistics and HCI have known for decades that grammar
 disambiguates — but the AI-augmented context elevates

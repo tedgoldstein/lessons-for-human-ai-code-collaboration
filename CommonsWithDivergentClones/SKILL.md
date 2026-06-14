@@ -63,7 +63,7 @@ makes it cheap. Compared to alternatives:
 
 | Property | Aim for | Why |
 |---|---|---|
-| **Commons repo** | one, named for its identity (e.g. `harp`, `radar`) | The commons is its own thing, not a "shared utilities" appendage |
+| **Commons repo** | one, named for its identity (e.g. `harp`, `Track`) | The commons is its own thing, not a "shared utilities" appendage |
 | **Descendant relationship** | git clone, then diverge | History is shared up to the clone point; diff is clear |
 | **Merge direction** | commons → descendant only, periodic | Descendants pick up improvements without coordination |
 | **Reverse direction** | explicitly closed | What makes commons a commons is project-agnostic content |
@@ -107,7 +107,7 @@ its own contributor guide. Treating it as a first-class repo
 
 - **Name the commons after what it *is*, not what it
   serves.** "HARP" (the platform), not "shared-libs."
-  "Radar" (the methodology), not "common-bug-tracker."
+  "Track" (the methodology), not "common-bug-tracker."
   The commons has its own identity.
 - **Document the relationship explicitly.** A `CLAUDE.md`
   or `README.md` in the commons that says "X, Y, Z are
@@ -128,7 +128,7 @@ its own contributor guide. Treating it as a first-class repo
 - **When a descendant needs something the commons should
   have, *propose it on the commons*** (not "PR back" —
   there's no PR-back direction). The descendant maintainer
-  writes a Radar / issue / PR against commons; the
+  writes a Track / issue / PR against commons; the
   commons maintainer decides whether it's generic enough.
 
 ## Common failure modes
@@ -141,7 +141,7 @@ its own contributor guide. Treating it as a first-class repo
 - **The dead-cousin problem.** Descendant-A and
   descendant-B both add the same feature independently
   because neither realized the other had done it.
-  Mitigation: a public Radar / RFC process on the commons
+  Mitigation: a public Track / RFC process on the commons
   for emerging shared concerns. ("Anyone needs an X?
   Speak up.")
 - **One-way-merge in name only.** Someone tries to push
@@ -194,13 +194,13 @@ HARP → children. Changes never flow child → parent."*
 Branch naming for the commons/labbook split is
 `split/{phase}-{name}`.
 
-The same pattern recurs fractally at the Radar
-methodology: the **radar/** repo is the commons; **Medbook**
+The same pattern recurs fractally at the Track
+methodology: the **Track/** repo is the commons; **Medbook**
 and **Labbook** are descendant adopters that hold their own
 copies of the four canonical files (`SKILL.md`,
-`RADAR_TEMPLATE.md`, etc.) plus their own Radars. When
+`TRACK_TEMPLATE.md`, etc.) plus their own Tracks. When
 canonical evolves, descendants refresh via
-`radar init --force` — which is just `cp` in a trench
+`Track init --force` — which is just `cp` in a trench
 coat, but the trench coat enforces the one-way direction.
 
 ## Tagline
@@ -229,7 +229,7 @@ own identities. Merges flow downhill.
 ## Sources
 
 Inferred from observing HARP (the Health AI Research
-Platform commons) and the radar/Medbook/Labbook adoption
+Platform commons) and the Track/Medbook/Labbook adoption
 pattern (2026-05). The pattern is older: Plan 9's union
 mounts, Unix's BSD/SysV/GNU forks, the LLVM/Clang split,
 upstream/downstream in Linux distributions. This skill is

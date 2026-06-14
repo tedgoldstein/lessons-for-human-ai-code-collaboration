@@ -78,8 +78,8 @@ has versioning, diffing, and merging.
    grows surface without growing complexity in any one tool.
 
 3. **The bootstrap problem dissolves.** When a new tool can't
-   yet do something — radar.app can't file Radars about
-   radar.app — you fall back to the contract directly. Edit
+   yet do something — Track.app can't file Tracks about
+   Track.app — you fall back to the contract directly. Edit
    the file in a text editor; the next-newest tool will pick
    up the change. There's never a *blocking* dependency on a
    single tool.
@@ -179,16 +179,16 @@ than your one tool, and ideally by `cat`."
 
 ## Worked example
 
-The Radar methodology was designed contract-first. Every Radar
-is a markdown file at `Radar/<id>.md` with a known section
+The Track methodology was designed contract-first. Every Track
+is a markdown file at `Track/<id>.md` with a known section
 shape. The CLI, the macOS app, the web dashboard, future
 agents — all consume the same files. When one consumer
-(radar.app) was incomplete, Radars were filed and driven from
+(Track.app) was incomplete, Tracks were filed and driven from
 the CLI + a text editor. When a second adopting project
 (Medbook) had been hand-maintaining a fork of the methodology
-that drifted, refreshing was a `radar init --force` away —
+that drifted, refreshing was a `Track init --force` away —
 the new vendored skill files dropped into the same directory
-structure, and every existing on-disk Radar continued to parse
+structure, and every existing on-disk Track continued to parse
 under the canonical CLI. Multiple concurrent AI sessions all
 worked from the same files; their handoff was git, not a
 shared service. The contract — markdown + git + an 8-char id —
@@ -218,9 +218,9 @@ ships, the contract is what it renders.
 
 ## Sources
 
-Inferred from observing the Radar methodology (radar repo,
+Inferred from observing the Track methodology (Track repo,
 2026-05) where the file-format-as-contract approach let the
-methodology spread across three projects (radar/, medbook.org,
+methodology spread across three projects (Track/, medbook.org,
 labbook.ai) without any single consumer being load-bearing.
 The pattern is older — it's the same instinct behind plain-text
 configuration files, RFC-defined wire protocols, and "everything

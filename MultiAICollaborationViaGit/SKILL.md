@@ -47,7 +47,7 @@ productive instead of chaotic.
 | **Scope rule per session** | explicit list of files each is allowed to touch | A session that goes outside scope halts and reports rather than expanding silently |
 | **Uncommitted state** | belongs to whichever session is in flight; never trample | Stashing or resetting destroys another session's working memory |
 | **Cloud context inlining** | LOCAL MEMORY rules baked into the cloud session's prompt | The cloud agent literally cannot see `~/.claude/` |
-| **Cross-session handoff** | through a committed file (a Radar, a routine artifact, a TODO) | Two ships in the night need a written letter |
+| **Cross-session handoff** | through a committed file (a Track, a routine artifact, a TODO) | Two ships in the night need a written letter |
 | **Merge cadence** | each branch lands its own PR; no automatic cross-branch coordination | Reviewer (or human owner) is the final arbiter |
 
 ## Why it matters
@@ -78,8 +78,8 @@ productive instead of chaotic.
    they're both right.
 
 4. **Branches encode intent.** A branch named
-   `claude/radar/<id>` says "this branch is doing work on
-   Radar `<id>`, started by a Claude session." A reviewer
+   `claude/Track/<id>` says "this branch is doing work on
+   Track `<id>`, started by a Claude session." A reviewer
    scanning `git branch -a` sees the in-flight Claude work
    at a glance and can decide whether to wait for it.
 
@@ -92,7 +92,7 @@ productive instead of chaotic.
 ## Practical guidance
 
 - **Branch convention per session type.** Pick a prefix and
-  enforce it. `claude/radar/<id>` for Radar-driven work;
+  enforce it. `claude/Track/<id>` for Track-driven work;
   `claude/<area>/<topic>` for cross-cutting; `feature/<name>`
   for human work. The prefix makes it obvious which branches
   came from which kind of session — and CI/branch-protection
@@ -131,14 +131,14 @@ productive instead of chaotic.
 
 - **Document predictable collisions.** When you discover
   two sessions independently invented the same thing, file
-  it. The Radar / RFC / design doc that names "Running vs
+  it. The Track / RFC / design doc that names "Running vs
   Execution: both invented; Running wins" is itself a
   cross-session-coordination artifact for the next time
   this happens.
 
 - **A "scratchpad" file in the repo for cross-session
   notes.** Sometimes the cleanest handoff is a file —
-  `NOTES.md`, `Radar/<id>.md`, a routine artifact —
+  `NOTES.md`, `Track/<id>.md`, a routine artifact —
   written by session A so session B can pick it up. The
   file is the letter; the next session reads it.
 
@@ -168,7 +168,7 @@ productive instead of chaotic.
   are pushed before anyone notices. Resolution is
   cheap (pick one, rewrite the other) but the lesson
   is to plan field names in a shared design surface
-  (a Radar) before two sessions reach for the same
+  (a Track) before two sessions reach for the same
   concept independently.
 
 - **The unfinished PR cascade.** Session A's PR sits
@@ -233,7 +233,7 @@ contract.
 Session A walks in, finds:
 - An in-flight branch `claude/skill/execution-dimension`
   with one committed change (B's work) and three
-  uncommitted Radar status updates (B's close-out work).
+  uncommitted Track status updates (B's close-out work).
 - An untracked test artifact from session C's previous
   run.
 
@@ -243,10 +243,10 @@ Session A:
    `## Running`; which wins?"
 2. After the user picks "Running wins," renames B's
    `## Execution` sections to `## Running` across every
-   affected Radar.
+   affected Track.
 3. Refreshes the canonical files via `init --force`.
 4. Stages only the files A actually modified — leaves
-   B's three uncommitted Radar mods alone (those are
+   B's three uncommitted Track mods alone (those are
    B's work; A didn't author them and won't commit
    them).
 5. Commits with a message that explicitly notes the
@@ -289,7 +289,7 @@ explicit decision rather than by accident.
 ## Sources
 
 Inferred from observing concurrent Claude Code sessions
-working on a shared methodology repo (radar / Medbook /
+working on a shared methodology repo (Track / Medbook /
 Labbook, 2026-05), including a real collision where two
 sessions independently invented the same field with
 different names. The branch-prefix convention, the
