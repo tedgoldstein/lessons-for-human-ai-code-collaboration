@@ -1,6 +1,6 @@
 ---
 name: using-lessons
-description: Bootstrap directive for this skill library. Before acting on any non-trivial software-engineering task — committing, pushing, refactoring, naming, debugging a regression, designing an API, choosing a tool, running a postmortem, setting up multi-agent work, deploying — check whether a lesson applies; load it if it plausibly does; announce which one and why; follow it. Skill loading is an internal, cheap, reversible action; bias hard toward loading. Reconciles with AskExactlyWhenAmbiguous: load skills eagerly, pause the user only when the decision is hard to reverse, externally-visible, or under-specified.
+description: Bootstrap directive for this skill library. Before acting on any non-trivial software-engineering task — committing, pushing, refactoring, naming, debugging a regression, designing an API, choosing a tool, running a postmortem, setting up multi-agent work, deploying — check whether a lesson applies; load it if it plausibly does; announce which one and why; follow it. Skill loading is an internal, cheap, reversible action; bias hard toward loading. Reconciles with AskExactlyWhenAmbiguous — load skills eagerly, pause the user only when the decision is hard to reverse, externally-visible, or under-specified.
 version: 0.1.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: ask-exactly-when-ambiguous
-description: When given autonomous scope ("work largely unsupervised," "you decide," "use your judgment"), the AI's job is to proceed by default and pause **only** at moments of real ambiguity — not over-confirm, not silently decide on irreversible things. The discriminator: pause when the decision is hard to reverse, affects shared/external state, or requires information you don't have. Otherwise, proceed and report. Over-confirming is friction; silently deciding the wrong thing is worse. The skill is reading which moment is which.
+description: When given autonomous scope ("work largely unsupervised," "you decide," "use your judgment"), the AI's job is to proceed by default and pause **only** at moments of real ambiguity — not over-confirm, not silently decide on irreversible things. The discriminator — pause when the decision is hard to reverse, affects shared/external state, or requires information you don't have. Otherwise, proceed and report. Over-confirming is friction; silently deciding the wrong thing is worse. The skill is reading which moment is which.
 version: 0.1.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: bootstrap-by-hand
-description: When a tool is meant to manage some kind of artifact (issues, schedules, configs, documents), and the tool isn't yet ready to manage *itself* — the file that fixes the broken file-editor, the issue that tracks the broken issue-tracker, the schedule that schedules the scheduler — fall back to the contract directly. Edit the file by hand. The tool can land later; the work doesn't have to wait. This is the chicken-and-egg lens: design systems so the egg can be laid before the chicken hatches.
+description: When a tool is meant to manage some kind of artifact (issues, schedules, configs, documents), and the tool isn't yet ready to manage *itself* — the file that fixes the broken file-editor, the issue that tracks the broken issue-tracker, the schedule that schedules the scheduler — fall back to the contract directly. Edit the file by hand. The tool can land later; the work doesn't have to wait. This is the chicken-and-egg lens — design systems so the egg can be laid before the chicken hatches.
 version: 0.1.0
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: tarzan-migration-strategy
-description: When migrating a high-risk system, don't cut over all at once. Run old and new in parallel — dual-write or bridge state, route a small canary fraction of traffic to the new system, validate, increment, eventually flip the rest. Never let go of the old vine until you have a firm grip on the new one. Reversibility is the point: a config flip routes traffic back to legacy. The alternative — Big Bang — turns every bug into an outage.
+description: When migrating a high-risk system, don't cut over all at once. Run old and new in parallel — dual-write or bridge state, route a small canary fraction of traffic to the new system, validate, increment, eventually flip the rest. Never let go of the old vine until you have a firm grip on the new one. Reversibility is the point — a config flip routes traffic back to legacy. The alternative — Big Bang — turns every bug into an outage.
 version: 0.1.0
 ---
 
