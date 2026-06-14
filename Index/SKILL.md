@@ -899,6 +899,95 @@ prefix-shaped (stable setup at the front, variable workload at the
 back) so the substrate's existing cache catches it — not to demand
 a snapshot/clone primitive the substrate doesn't have.
 
+### → Load `CriticalEventGate`
+
+When the work is **about to cross from safe preparation into live,
+costly, credentialed, irreversible, or user-impacting action** —
+the boundary where autopilot causes catastrophe.
+
+Triggers:
+
+- About to mutate live infrastructure, deploy code, or
+  create/delete/modify cloud resources.
+- About to set, rotate, expose, or consume secrets.
+- About to spend material money, call real provider APIs, or
+  touch customer / PII / PHI / regulated data.
+- About to alter GitHub or other remote state, or change
+  production-like configuration.
+- About to cross `local → host-side`, `sandbox → network`,
+  `mock → live`, `read-only → mutating`, or `dev → production`.
+- About to make a breaking API/schema change or an
+  expensive-to-unwind architecture decision.
+- About to authorize broad-scope autonomous AI execution.
+- You're uncertain whether a boundary is "gate-worthy" — that
+  uncertainty is itself the trigger.
+
+**The skill teaches:** run a mandatory, recorded,
+challenge-response pause at the boundary — Gate Checklist, Stop
+Conditions, Gate Record, an explicit GO / NO-GO / HOLD poll.
+Borrows from surgical time-outs, aviation checklists, nuclear STAR,
+and military Go/No-Go. Release Authority is human-only; the goal is
+not bureaucracy but preventing the autopilot drift from "the plan
+is probably right" to "run the command."
+
+### → Load `FidelityOverScaffolding`
+
+When **a test passes against something you built** — a fake, stub,
+mock, or hand-written fixture — but the code has never run against
+the real runtime, API, OS, peer, or storage. Especially at a
+boundary.
+
+Triggers:
+
+- "It passes" — but the code has never run against the real API /
+  runtime / OS / other process / peer.
+- You're asserting against a fixture whose shape *you wrote*
+  (response JSON, error codes, return types, event ordering).
+- "Should I mock this or use the real thing?" for something that
+  crosses a boundary.
+- A bug shipped (or a live run 404'd / hung) that the green unit
+  tests didn't catch.
+- About to build *another storey* on a layer only ever proven
+  against scaffolding.
+- Porting to a new OS / runtime / dependency version where the
+  existing tests are all fakes.
+
+**The skill teaches:** scaffolding proves the scaffolding, not the
+building; only fidelity (real runtime/API/OS/peer/storage) proves
+the structure stands in the earthquake. A passing test on a wrong
+fake is a load-bearing lie — the green check hides the crack. Keep
+fakes for speed and inner-loop logic, but run the live path at
+least once before declaring done, pin fakes to captured real
+responses, and don't build the next floor on unproven scaffolding.
+
+### → Load `MasterChildMergeDiscipline`
+
+When the **master-child Track pattern** is in play — one Master
+Trackfile + N Phase children + a long-lived master branch — and
+you're merging Phase work or updating the Master.
+
+Triggers:
+
+- About to `git checkout <master-branch>` (e.g.
+  `track-session-manager`) in the canonical repo.
+- About to `git merge claude/track/<phaseid>`.
+- Filing a new Phase child of an existing Master and registering
+  it in the Master's Children list.
+- Appending a row to the Master Trackfile's `## Child progress`
+  after a Phase event.
+- About to compose a `Master <id>:` commit subject for a commit
+  that touches implementation files.
+- A `git status` in the canonical checkout reports the
+  master-branch head instead of `main`.
+
+**The skill teaches:** keep the canonical checkout on `main` as a
+stable read-only inspection point; do all master-branch work
+(Phase merges, Master Trackfile updates, child-progress rows) in a
+dedicated worktree. When merging a Phase branch, the commit subject
+is `Track <phaseid>:` (the Phase owns implementation scope), not
+`Master <masterid>:`. The scope hook won't catch a wrong-branch
+commit — discipline is the only barrier.
+
 ## How to use this index
 
 1. Read the trigger phrases for each entry; they cover most of
