@@ -836,6 +836,69 @@ scaffold draft skills for recurring gaps, and report a diff
 summary so the user can review. Auto-applies edits.
 Worth doing imperfectly; the alternative is forgetting.
 
+### → Load `TarzanMigrationStrategy`
+
+When the work involves **replacing or migrating a high-risk
+system** — production infrastructure, a database, a third-party
+integration, or a core identifier — where a single all-at-once
+cutover would be customer-visible if it went wrong.
+
+Triggers:
+
+- A production system needs replacing but downtime is
+  unacceptable.
+- A database migration touches data the app reads in hot paths.
+- An identity provider, payment processor, or third-party
+  integration is being swapped.
+- You've been handed "a four-hour maintenance window" for a change
+  too big to verify in four hours.
+- A previous Big-Bang migration left scars (open incident review,
+  wary leadership).
+- A monolith is being split and the new service isn't fully proven.
+- An API version (`v1 → v2`) is being deprecated while external
+  consumers remain on the old one.
+- Renaming a core identifier referenced in hundreds of places —
+  too much for one PR.
+
+**The skill teaches:** never let go of the old vine until you have
+a firm grip on the new one. Run both systems live, bridge state
+(dual-write or one canonical store), route a small canary fraction
+to the new system and increment, and keep a reverse switch that
+returns traffic to legacy in seconds. Reversibility is the point;
+without all four parts you have a slow Big Bang with extra steps.
+
+### → Load `CacheThePrefix`
+
+When **expensive preparation precedes useful work** — loading
+skills/plugins into an AI session, hydrating a dev environment,
+warming a JIT, rebuilding a container — and the instinct is to
+*snapshot* or *clone* the prepared state.
+
+Triggers:
+
+- An AI agent (or you) wants to "clone the session," "fork the
+  env," or "snapshot the runtime" before N more runs.
+- An expensive init step repeats across many short-lived actors
+  (CI jobs, test runs, lambda cold starts, parallel AI sessions).
+- A build is slow and the slowness is the *same* every time, not
+  workload-dependent.
+- Someone proposes to checkpoint a process, save a VM image, or
+  dump-and-restore memory because re-initializing is "too slow."
+- A workflow is dominated by setup time, paid on every invocation.
+- You're designing a "session" / "context" / "workspace"
+  abstraction that will be instantiated repeatedly.
+- "Warm start" appears in the architecture but no caching layer
+  makes a start warm.
+
+**The skill teaches:** nearly every layer of the stack already
+amortizes setup through **prefix caching** — hash a deterministic
+prefix, key the cached output by that hash (Anthropic prompt cache,
+Docker layers, Bazel/Nix actions, npm stores, CDN, page cache,
+V8 code cache). The move is to make your setup deterministic and
+prefix-shaped (stable setup at the front, variable workload at the
+back) so the substrate's existing cache catches it — not to demand
+a snapshot/clone primitive the substrate doesn't have.
+
 ## How to use this index
 
 1. Read the trigger phrases for each entry; they cover most of
