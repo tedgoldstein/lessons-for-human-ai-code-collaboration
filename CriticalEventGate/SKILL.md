@@ -1,3 +1,9 @@
+---
+name: critical-event-gate
+description: A mandatory, recorded, challenge-response pause before crossing from safe preparation into live, costly, credentialed, user-impacting, security-sensitive, or irreversible action. Complex expert work creates autopilot risk — humans and AI collaborators alike drift from "the plan is probably right" to "run the command" without noticing the consequence class has changed. Borrowing from surgical time-outs, aviation challenge-response checklists, nuclear STAR behavior, and military Go/No-Go polls, the gate interrupts autopilot at the boundary. Load this skill before any action that can mutate live infrastructure, deploy code, create/delete cloud resources, set or rotate or expose secrets, spend material money, call real provider APIs, touch customer/PII/PHI/regulated data, alter remote (GitHub) state, change production config, grant credentials, cross from sandbox to host/network execution, make a breaking API/schema change, take an expensive-to-unwind architecture decision, or authorize broad-scope autonomous AI execution. Release Authority is human-only.
+version: 0.1.0
+---
+
 # Critical Event Gate Skill
 
 **Skill name:** Critical Event Gate  
