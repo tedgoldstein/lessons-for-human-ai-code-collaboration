@@ -1,8 +1,10 @@
+---
 name: live-session-management-for-agentic-engineering
 description: Multi-agent engineering requires a live session layer in addition to durable Trackfiles, worktrees, checkpoint transactions, and commits. Trackfiles record durable work, worktrees isolate filesystem mutation, Transaction Guard protects mutation, and tmux preserves terminal state. A Session Manager records live actors, claimed files, PTY bindings, warm agent readiness, and restart reconciliation so human and AI sessions can operate concurrently without silently corrupting shared state.
 version: 0.1.0
+---
 
-Live Session Management For Agentic Engineering
+# Live Session Management For Agentic Engineering
 
 Radar began as a bug tracker and grew into a software engineering management system. Track begins where Radar leaves off. Track is not merely a way to record bugs, tasks, and workflow state. It is a coordination system for human, multi-human, AI-assisted, and multi-agent software engineering.
 
@@ -36,7 +38,7 @@ The guiding rule is that live cognitive actors must never have ambiguous authori
 
 This is the operational law that emerged from repeated multi-agent collisions: durable work records are necessary, but not sufficient. Parallel agents also need live presence, physical isolation, path claims, terminal handoff, heartbeat, authority boundaries, and deterministic cleanup.
 
-Recommendations
+# Recommendations
 
 Create a Session Manager as a distinct Track layer rather than expanding Trackfiles into live state. Store session and worker records under the common Git directory or another local ignored state directory. Use schema-versioned JSON for current state and append-only JSONL for event history.
 
@@ -52,15 +54,15 @@ Use roles as authority profiles, not labels. Fixers, reviewers, verifiers, obser
 
 Keep assigned sessions conservative. Never kill assigned work automatically. Mark stale or crashed sessions, preserve evidence, and expose attach, observe, takeover, or recovery guidance. Idle ready workers are replaceable. Assigned workers are evidence-bearing work objects.
 
-Tagline
+# Tagline
 
 Trackfiles record durable work. Worktrees isolate filesystem mutation. Transaction Guard protects mutation. tmux preserves terminal state. A Session Manager records live actors and prevents powerful human and AI sessions from gaining ambiguous authority.
 
-Related skills
+# Related skills
 
 isolation-and-transactional-discipline explains why concurrent actors force systems toward ACID-like coordination models. multi-ai-collaboration-via-git focuses on Git hygiene for concurrent AI coding sessions. causal-divergence describes how multiple simultaneously valid timelines require reconciliation. the-contract-is-the-artifact explains why coordination state must live in durable shared artifacts. fluid-vs-tricky describes the shift from exploratory work to correctness-sensitive infrastructure.
 
-Sources
+# Sources
 
 Surfaced during Track design discussions following repeated parallel-session interference during the Radar-to-Track rename and Transaction Guard implementation. The observed failure mode involved multiple AI coding sessions operating against shared repository state without a live session registry, dedicated worktrees, explicit file claims, or durable actor presence.
 

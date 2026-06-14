@@ -1067,70 +1067,6 @@ is `Track <phaseid>:` (the Phase owns implementation scope), not
 `Master <masterid>:`. The scope hook won't catch a wrong-branch
 commit — discipline is the only barrier.
 
-### → Load `CommitHygiene`
-
-When the work involves **making a commit or a push** — what goes
-into it, what the message says, where it lands, and who saw it
-first.
-
-Triggers:
-
-- About to `git commit -am "stuff"` (or any sweeping all-in add).
-- About to commit directly to `main` because "it's just a small
-  fix."
-- About to push without anyone (human or otherwise) having seen
-  the diff.
-- About to force-push to overwrite a prior push.
-- A commit message says `wip`, `fix`, `update`, `done`, or
-  `stuff`.
-- The diff includes a `.env`, a build artifact, `node_modules/`,
-  IDE settings, or stray `console.log` debug output.
-- A commit's author email is `you@laptop.local` because git
-  config was never set.
-- A `git log --oneline` line gives no clue what the commit did.
-- An AI agent is about to commit + push without explicit user
-  approval.
-
-**The skill teaches:** a commit is a permanent record, a push is a
-public commitment — two operations, two checklists, two approvals.
-Stage explicitly (never sweep secrets / build artifacts in), write
-messages future-you can learn from, branch + PR rather than commit
-to `main`, don't push proactively, and force-push only after asking
-(it overwrites the audit trail). Complements `PushIsPublication`
-(push cadence) and `OrganisingGitPullRequests` (commit shape).
-
-### → Load `FluidVsTricky`
-
-When the work involves **deciding build order under uncertainty** —
-whether to build the GUI and the foundation together or to collapse
-to foundation-first — or diagnosing thrown-away UI work.
-
-Triggers:
-
-- A new feature is "obvious" and requirements are still being
-  shaped by what you discover building (fluid → build both at
-  once).
-- A feature touches concurrency, atomicity, persistence, security,
-  or a contract other actors rely on (tricky → foundation first).
-- A bug's diagnosis names a *class of incident* rather than a
-  single missed case (tricky — that's a correctness-property
-  diagnosis).
-- You've thrown away the same UI flow twice (the foundation isn't
-  ready; stop polishing the surface).
-- You can't write down the invariants the current layer must hold
-  — you're tricky, write them down before building above.
-- A reviewer would ask *factual* questions about a layer's
-  behavior rather than design-taste questions (tricky).
-
-**The skill teaches:** two regimes, two strategies. When fluid,
-build GUI and foundation simultaneously in feedback with each
-other; when tricky (subtle correctness / concurrency / contract
-concerns), collapse to bottom-up, harden the foundation, defer the
-GUI. The mistake is mixing regimes — parallel-building on a tricky
-foundation burns UI work that gets thrown away when the foundation
-shifts. Know which regime you're in, and switch when it changes
-(tricky→fluid is as real as fluid→tricky).
-
 ### → Load `MeasureDontGuess`
 
 When the work involves **a performance, memory, or latency
@@ -1163,6 +1099,77 @@ instrument your own code with named intervals (`os_signpost` /
 Points of Interest, tracing spans) so the trace reads as a
 narrative of *your* operations, not raw frames — a designed,
 permanent surface like logs. Trace, then touch.
+
+### → Load `IsolationAndTransactionalDiscipline`
+
+When the work involves **concurrent actors mutating shared
+state** — and you're deciding how they coordinate, or
+diagnosing corruption that arose because they didn't.
+
+Triggers:
+
+- About to run multiple AI sessions, jobs, or workers against
+  one repo, database, cache, queue, or filesystem.
+- Shared state got corrupted and the instinct is to blame an
+  actor rather than the missing isolation boundary.
+- Designing where coordination state lives — and tempted to
+  collapse durable authority, ephemeral locks, semantic
+  retrieval, and audit history into one "memory" system.
+- A mutation pathway has no transactional boundary and no
+  recovery story ("did this happen completely, partially, or
+  not at all?" has no answer).
+- Reaching for Redis as the authoritative source of truth, or
+  a vector DB as "shared understanding."
+- Coordination currently lives in chat / memory / intuition
+  rather than somewhere machines can inspect.
+
+**The skill teaches:** as concurrent actors rise, systems
+converge on ACID-like properties (atomicity, consistency,
+isolation, durability) — not as database trivia but as the
+recurring answer to concurrent-mutation pressure. Intelligence
+doesn't compensate for weak coordination architecture; capable
+actors corrupt shared mutable state faster. Make isolation
+boundaries structural, give every mutation a transactional
+boundary and recovery path, keep coordination state in durable
+inspectable artifacts, and separate storage responsibilities
+(authority / ephemeral / retrieval / audit / orchestration).
+Pairs with `CausalDivergence`, `MultiAICollaborationViaGit`,
+`TheContractIsTheArtifact`, and `LiveSessionManagementForAgenticEngineering`.
+
+### → Load `LiveSessionManagementForAgenticEngineering`
+
+When the work involves **multiple live human/AI sessions
+operating concurrently** — and durable records alone can't
+answer "who is working right now, on what, with what
+authority?"
+
+Triggers:
+
+- Standing up concurrent Claude/Codex sessions and there's no
+  registry of who is active, which files are claimed, or which
+  worktree/terminal owns the work.
+- A session crashed, rebooted, or detached and you can't tell
+  whether its work is alive, stale, or recoverable.
+- Building a pool of pre-warmed agents and deciding whether a
+  used worker can safely return to the ready queue.
+- Two windows might observe or take over the same terminal and
+  authority is ambiguous.
+- Tempted to expand Trackfiles into live execution state, or to
+  reimplement terminal multiplexing instead of using tmux.
+- An assigned session with an active transaction vanished and
+  something wants to auto-repair it.
+
+**The skill teaches:** add a live session layer alongside
+durable Trackfiles, worktrees, transaction guards, and tmux. A
+Session Manager binds an actor to a Track, worktree, branch,
+claimed files, heartbeat, role, and PTY — recording live
+presence that durable records can't. Use tmux as the v1 PTY
+backend; treat warm workers as single-use leased cognitive
+capabilities; make restart reconciliation mandatory; and never
+let a live actor hold ambiguous mutation authority (ready =
+none, reviewer = read-only, fixer = claimed files inside the
+guard). Pairs with `IsolationAndTransactionalDiscipline`,
+`MultiAICollaborationViaGit`, and `CausalDivergence`.
 
 ## How to use this index
 
