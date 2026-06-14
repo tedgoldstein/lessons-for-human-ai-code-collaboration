@@ -100,11 +100,11 @@ func renderFrame(_ scene: Scene) {
     defer { signposter.endInterval("renderFrame", state) }
 
     let decode = signposter.beginInterval("decode")
-    let pixels = decode(scene.image)
+    let pixels = decodeImage(scene.image)
     signposter.endInterval("decode", decode)
 
     let layout = signposter.beginInterval("layout")
-    let frame = layout(scene, pixels)
+    let frame = layoutScene(scene, pixels)
     signposter.endInterval("layout", layout)
 }
 ```
