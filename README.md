@@ -75,6 +75,7 @@ the current situation needs.
 | [MasterChildMergeDiscipline](MasterChildMergeDiscipline/SKILL.md) | In the master-child Track pattern, keep the canonical checkout on `main` as a stable inspection point and do all master-branch work in a dedicated worktree. A Phase merge's commit subject is `Track <phaseid>:`, not `Master <id>:`. The scope hook won't catch a wrong-branch commit — discipline is the only barrier. |
 | [CommitHygiene](CommitHygiene/SKILL.md) | A commit is a permanent record; a push is a public commitment — two operations, two checklists, two approvals. Stage explicitly (no sweeping in secrets / build artifacts), write messages future-you can learn from, branch + PR rather than commit to `main`, force-push only after asking. |
 | [FluidVsTricky](FluidVsTricky/SKILL.md) | Build order under uncertainty. When requirements are *fluid*, build GUI and foundation in parallel, each surfacing what the other hides. When the layer gets *tricky* (correctness, concurrency, contracts), collapse to bottom-up and harden the foundation first. The mistake is mixing regimes. |
+| [MeasureDontGuess](MeasureDontGuess/SKILL.md) | When something is slow or heavy, capture a real profiler trace before changing code — the hot path is rarely where intuition points. Instrument your own code with named signposts (Apple Instruments / `os_signpost`, tracing spans) so the trace reads as a narrative of your operations. Trace, then touch. |
 
 ## Why human-AI specifically
 
