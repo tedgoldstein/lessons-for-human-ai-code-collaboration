@@ -1052,6 +1052,37 @@ foundation burns UI work that gets thrown away when the foundation
 shifts. Know which regime you're in, and switch when it changes
 (tricky→fluid is as real as fluid→tricky).
 
+### → Load `MeasureDontGuess`
+
+When the work involves **a performance, memory, or latency
+problem** — or you're about to optimise something on the strength
+of intuition rather than a measurement.
+
+Triggers:
+
+- "This feels slow" / "the UI janks" / "scrolling stutters."
+- A request, render, or job is over its time budget and you're
+  about to guess which part is responsible.
+- About to rewrite a loop, add a cache, or swap a data structure
+  *for performance* with no number that says it's the bottleneck.
+- Memory grows and you're about to comment out code to find the
+  leak.
+- An AI agent proposes an optimisation justified by "this is
+  probably the expensive part."
+- A benchmark moved and nobody can say which change moved it.
+- A trace is a wall of framework stack frames with no domain
+  labels — your own operations aren't instrumented.
+- You're hand-tuning code that turns out to run once at startup.
+
+**The skill teaches:** capture a real profiler trace before
+touching anything (Apple Instruments Time Profiler / Allocations,
+`perf`, Tracy, Chrome tracing, `py-spy`, `pprof`), because the hot
+path is usually not where intuition points. The second half:
+instrument your own code with named intervals (`os_signpost` /
+Points of Interest, tracing spans) so the trace reads as a
+narrative of *your* operations, not raw frames — a designed,
+permanent surface like logs. Trace, then touch.
+
 ## How to use this index
 
 1. Read the trigger phrases for each entry; they cover most of
@@ -1071,7 +1102,10 @@ shifts. Know which regime you're in, and switch when it changes
 
 The library is small and biased. It does not cover:
 
-- Performance tuning, profiling, or systems-level optimization.
+- Deep systems-level optimization technique (cache-line layout,
+  SIMD, lock-free data structures). `MeasureDontGuess` covers the
+  *discipline* — trace before you optimise — but not the catalogue
+  of optimisations themselves.
 - Security review or threat modeling.
 - Architecture-at-scale (microservices, eventing, CQRS, etc.).
 - Specific language idioms or framework-specific best practices.
