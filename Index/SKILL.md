@@ -1067,6 +1067,8 @@ Triggers:
   *for performance* with no number that says it's the bottleneck.
 - Memory grows and you're about to comment out code to find the
   leak.
+- It's slow but the CPU looks idle — lock contention or blocked
+  threads, which a sampling profiler can't see.
 - An AI agent proposes an optimisation justified by "this is
   probably the expensive part."
 - A benchmark moved and nobody can say which change moved it.

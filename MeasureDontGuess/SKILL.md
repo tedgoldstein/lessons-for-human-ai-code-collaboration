@@ -41,6 +41,8 @@ logs (see [`LogsAreAFeature`](../LogsAreAFeature/SKILL.md)).
   problem.
 - Memory grows and you're about to start commenting out code to
   find the leak.
+- It's slow but the CPU looks idle — a sign of lock contention or
+  threads blocked waiting, which a sampling profiler can't see.
 - An AI agent (or you) proposes an optimisation whose justification
   is "this is probably the expensive part."
 - A benchmark moved and nobody can say which change moved it.
@@ -115,6 +117,57 @@ can live in shipping code. The non-Apple equivalents are tracing
 spans (OpenTelemetry, `tracing` in Rust, Zipkin/Jaeger for
 distributed work) — same idea: the program emits a structured,
 named timeline of what it's doing.
+
+### Signpost the wait, not just the work
+
+The case where this earns its keep most is **lock contention**,
+because contention is invisible to a sampling profiler. Time
+Profiler samples the CPU; a thread *blocked* on a lock burns no
+CPU, so it shows up as idle — or doesn't show up at all. The
+800ms you're chasing can be 780ms of threads parked waiting on
+each other, and the sampler will never point at it.
+
+With modern Swift concurrency (`actor`s, `OSAllocatedUnfairLock`,
+or a hand-rolled critical section) you can map that wait-time
+straight onto the timeline by wrapping the lock and signposting
+the two intervals that matter — the **wait** (blocked before
+acquisition) and the **hold** (time inside the critical section,
+i.e. how long you keep everyone else out):
+
+```swift
+import os
+
+final class InstrumentedLock {
+    private let lock = OSAllocatedUnfairLock()
+    private let signposter = OSSignposter(subsystem: "com.example.radar",
+                                          category: "locks")
+
+    func withLock<R>(_ name: StaticString, _ body: () -> R) -> R {
+        let id = signposter.makeSignpostID()
+
+        // The contention: time spent blocked before we get in.
+        let wait = signposter.beginInterval("lock wait", id: id, "\(name)")
+        lock.lock()
+        signposter.endInterval("lock wait", wait)
+
+        // The hold: time we keep the critical section to ourselves.
+        let held = signposter.beginInterval("lock held", id: id, "\(name)")
+        defer {
+            signposter.endInterval("lock held", held)
+            lock.unlock()
+        }
+        return body()
+    }
+}
+```
+
+Now the Points of Interest timeline shows `lock wait` and
+`lock held` bars right alongside the CPU and Thread State tracks.
+A fat `lock wait` bar that lines up with another thread's long
+`lock held` bar *is* the contention, drawn to scale — the thing
+the sample cloud structurally cannot show you. The same wrap goes
+around any custom synchronisation; an `actor`'s serial executor
+can be instrumented the same way at its hop points.
 
 This is the durable investment. The first trace finds today's
 bottleneck; the signposts you leave behind make *every future*
